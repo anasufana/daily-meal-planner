@@ -1,3 +1,11 @@
+.logo-title {
+  margin-top: 0;
+}
+
+.logo {
+  animation: Scale-logo 1s ease-in;
+}
+
 .App {
   text-align: center;
 }
@@ -22,7 +30,14 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+@keyframes Scale-logo {
+  0% {
+    transform: scale(1.1); }
+  10% {
+    transform: scale(1.1);
+  }
+  40% {
+    transform: scale(.9); } 
+  60% {
+      transform: scale(1); } 
+  }
