@@ -32,7 +32,7 @@ class MealPlannerInput extends React.Component {
           <div className="input-container">
             <span className="form-span">Exclude</span>
             <input
-              className="form-input-text"
+              className="form-input-text form-exclude"
               type="text"
             /><br />
             <span className="form-input-info">
@@ -48,6 +48,9 @@ class MealPlannerInput extends React.Component {
               value={this.state.targetCaloriesValue}
               onChange={this.handleTargetCalorieChange}
             /><br />
+            <span className="form-input-info">
+              Healthy target should be between 1000 and 3500
+            </span>
           </div>
           <button className="submit-btn"type="submit" value="Submit" disabled={!this.state.targetCaloriesValue}>Go!</button>
         </form>
