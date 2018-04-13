@@ -1,7 +1,7 @@
 /* global it, describe, expect, beforeEach */
 
 import React from 'react';
-import { configure, shallow } from 'enzyme';
+import { configure, shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import MealPlannerInput from '../components/MealPlannerInput';
 
@@ -17,9 +17,24 @@ describe('Meal Planner Input', () => {
     expect(component.exists()).toEqual(true);
   });
 
-  describe('Exclude input', () => {
-    it('should accept words separated by comma', () => {
-     expect(component.find('.form-exclude').text()).toEqual('nuts, bananas');
+  describe('Diet input', () => {
+    it.only('Should have "Good to go!" as default selection', () => {
+      let mountComponent = mount(<MealPlannerInput />);
+      // console.log(mountComponent.find('.dropdown-select'))
+      expect(mountComponent.find('.dropdown-select').childAt(0).prop('selected')).toEqual(true);
     });
+  });
+
+  describe('Exclude input', () => {
+    it('should accept no input', () => {
+
+    });
+    // it('should accept one item', () => {
+    //
+    // });
+    // it('should accept words separated by comma', () => {
+    //   const inputExclude = component.find('.form-exclude').text('nuts, bananas');
+    //
+    // });
   });
 });

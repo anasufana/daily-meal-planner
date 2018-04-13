@@ -2,10 +2,20 @@ import React from 'react';
 import '../css/components/MealPlannerInput.css';
 
 class MealPlannerInput extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       targetCaloriesValue: '',
+      diets: [
+        { value: '', name: 'Good to go!', selected: true },
+        { value: 'gluten free', name: 'Gluten free', selected: false },
+        { value: 'ketogenic', name: 'Ketogenic', selected: false },
+        { value: 'vegetarian', name: 'Vegetarian', selected: false },
+        { value: 'vegan', name: 'Vegan', selected: false },
+        { value: 'pescetarian', name: 'Pescetarian', selected: false },
+        { value: 'paleo', name: 'Paleo', selected: false },
+        { value: 'gluten free', name: 'Gluten free', selected: false },
+      ],
     };
 
     this.handleTargetCalorieChange = this.handleTargetCalorieChange.bind(this);
@@ -20,13 +30,12 @@ class MealPlannerInput extends React.Component {
           <div className="input-container">
             <span className="form-span">Choose your diet</span>
             <select className="dropdown-select">
-              <option value="" selected>Good to go!</option>
-              <option value="gluten free">Gluten free</option>
-              <option value="ketogenic">Ketogenic</option>
-              <option value="vegetarian">Vegetarian</option>
-              <option value="vegan">Vegan</option>
-              <option value="pescetarian">Pescetarian</option>
-              <option value="paleo">Paleo</option>
+              {this.state.diets.map(diet => (
+                <option key={diet.value} value={diet.value} selected={diet.selected}>
+                  { diet.name }
+                </option>
+              ))
+              }
             </select>
           </div>
           <div className="input-container">
