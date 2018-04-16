@@ -19,7 +19,8 @@ describe('Meal Planner Input', () => {
 
   describe('Exclude input', () => {
     it('should accept words separated by comma', () => {
-     expect(component.find('.form-exclude').text()).toEqual('nuts, bananas');
+     const formExclude = component.find('.form-exclude').text('nuts, bananas');
+     
     });
   });
 });
