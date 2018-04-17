@@ -18,3 +18,16 @@
   60% {
       transform: scale(1); }
   }
+
+
+
+  @media screen and (max-width: 769px) {
+  .logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .logo-title {
+    font-size: 2em;
+  }
+}

@@ -1,0 +1,97 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+a:visited,
+a:link {
+  color: #555;
+}
+.singleColumn {
+  border-radius: 5px;
+  box-shadow: 4px 4px 4px rgba(0,0,0,.1);
+  background-color: #fff;
+  margin-bottom: 20px;
+}
+
+.mealDetailsContainer {
+  display: grid;
+  grid-template-columns: 1fr 80px;
+  padding: 20px 10px 20px 5px;
+}
+.clockDiv {
+  position: relative;
+}
+.imgClock {
+  left: 20px;
+  top: 9px;
+  position: absolute;
+}
+.imageRecipe {
+  width: 100%;
+  height: 100%;
+  transition: 0.5s all;
+}
+
+.mealTitle {
+  padding: 10px;
+  text-align: left;
+  font-size: 1.7rem;
+}
+
+.recipeTitle {
+  padding: 10px;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.recipeDuration {
+  padding: 10px 50px;
+  font-size: 1rem;
+  border-left: 1px solid rgba(0,0,0,.3);
+}
+
+.imgContainer {
+  position: relative;
+  overflow: hidden;
+}
+
+.hoverBox {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  transition: all .5s;
+}
+
+.hoverTitle,
+.imgCooking {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: 0;
+  padding: 0;
+  transition: all 0.5s;
+  transform: translateX(-50%) translateY(-50%);
+
+}
+.imgCooking {
+  top: 63%;
+  left: 41%;
+
+}
+
+.imgContainer:hover .hoverBox {
+  left: 0%;
+  cursor: pointer;
+}
+
+.imgContainer:hover img {
+  transform: scale(1.2);
+  transition: all .5s;
+}
