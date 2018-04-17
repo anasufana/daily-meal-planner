@@ -6,10 +6,10 @@ import '../css/components/MealCard.css';
 class MealResultsListing extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {   
+    this.state = { 
     };
   }
- 
+
   render() {
     return (
     <div className="resultsContainer">
@@ -21,8 +21,6 @@ class MealResultsListing extends React.Component {
         <MealCard />
         <MealCard />
       </div>
-
-      
     </div>
     );
   }

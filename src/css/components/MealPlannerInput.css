@@ -9,28 +9,31 @@
   position: relative;
   text-align: left;
   padding: 0.75rem 0; }
-  .input-container .form-span {
-    margin-right: 1.5rem;
-    font-size: 1.6rem;
-    margin-bottom: 10px; }
-  .input-container .dropdown-select, .input-container .form-input-text {
-    width: 100%;
-    height: 50px;
-    border-radius: 5px;
-    border: 2px solid black;
-    transition: 0.25s all ease-in;
-    font-size: 1rem;
-    padding: 0.5rem;
-    margin-top: 10px;
-    font-family: 'Nanum Gothic', sans-serif; }
-    .input-container .dropdown-select:focus, .input-container .form-input-text:focus {
-      outline: none;
-      border: 2px solid pink; }
-  .input-container .form-input-info {
-    font-size: 0.75rem;
-    margin-top: 0.25rem;
-    display: block;
-    text-align: left; }
+
+.form-span {
+  margin-right: 1.5rem;
+  font-size: 1.6rem;
+  margin-bottom: 10px; }
+
+.dropdown-select, .form-input-text {
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  border: 2px solid black;
+  transition: 0.25s all ease-in;
+  font-size: 1rem;
+  padding: 0.5rem;
+  margin-top: 10px;
+  font-family: 'Nanum Gothic', sans-serif; }
+  .dropdown-select:focus, .form-input-text:focus {
+    outline: none;
+    border: 2px solid pink; }
+
+.form-input-info {
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  display: block;
+  text-align: left; }
 
 .submit-btn {
   height: 50px;
