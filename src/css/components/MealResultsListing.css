@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+a {
+  text-decoration: none; }
+
+a:visited,
+a:link {
+  color: #555; }
+
+.meal-calories-label {
+  text-align: left;
+  width: 55%;
+  margin: 0 auto;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.3); }
+
+.h3-calories {
+  display: inline-block;
+  padding: 8px 10px;
+  background-color: white;
+  border-radius: 5px 5px 0 0;
+  border-bottom: 3px solid black; }
+
+.meal-results-listing {
+  width: 55%;
+  margin: 0 auto;
+  padding: 1rem 0 2em 0;
+  /* border-top: 1px solid black; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 20px; }
+
+@media screen and (max-width: 550px) {
+  .meal-planner-input {
+    width: 300px; } }
+
+@media screen and (max-width: 769px) {
+  .meal-results-listing {
+    width: 75%;
+    margin: 0 auto;
+    padding: 1rem 0 2em 0;
+    /* border-top: 1px solid black; */
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-column-gap: 20px; }
+  .meal-calories-label {
+    width: 75%; } }
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .meal-results-listing,
+  .meal-calories-label {
+    width: 75%; } }

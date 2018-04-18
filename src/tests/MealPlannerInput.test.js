@@ -27,7 +27,6 @@ describe('Meal Planner Input', () => {
 
   describe('Exclude input', () => {
     it('should accept no input', () => {
-
     });
     // it('should accept one item', () => {
     //
