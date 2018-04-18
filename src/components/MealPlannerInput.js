@@ -6,7 +6,7 @@ class MealPlannerInput extends React.Component {
     super();
     this.state = {
       targetCaloriesValue: '',
-      excludeValue: '',
+      excludeValue: { value: '', warning: false},
       diets: [
         { value: '', name: 'Good to go!', selected: true },
         { value: 'gluten free', name: 'Gluten free', selected: false },
@@ -26,7 +26,7 @@ class MealPlannerInput extends React.Component {
   }
 
   handleExcludeValue(e) {
-    this.setState({ excludeValue: e.target.value });
+    this.setState({ excludeValue: { value: e.target.value, warning: true } });
   }
 
   render() {
@@ -49,7 +49,7 @@ class MealPlannerInput extends React.Component {
             <input
               className="form-input-text form-exclude"
               type="text"
-              value={this.state.excludeValue}
+              value={this.state.excludeValue.value}
               onChange={this.handleExcludeValue}
             /><br />
             <span className="form-input-info">
