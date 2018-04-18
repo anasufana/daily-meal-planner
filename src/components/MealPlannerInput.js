@@ -14,7 +14,6 @@ class MealPlannerInput extends React.Component {
         { value: 'vegan', name: 'Vegan', selected: false },
         { value: 'pescetarian', name: 'Pescetarian', selected: false },
         { value: 'paleo', name: 'Paleo', selected: false },
-        { value: 'gluten free', name: 'Gluten free', selected: false },
       ],
     };
 
