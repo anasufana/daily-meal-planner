@@ -45,7 +45,8 @@ class MealPlannerInput extends React.Component {
               type="text"
             /><br />
             <span className="form-input-info">
-              Example: nuts, shallots - separated by comma. Leave blank if you don&apos;t want to exclude anything
+              Example: nuts, shallots - separated by comma.<br />
+              Leave blank if you don&apos;t want to exclude anything
             </span>
           </div>
           <div className="input-container">
@@ -66,5 +67,6 @@ class MealPlannerInput extends React.Component {
     );
   }
 }
+
 
 export default MealPlannerInput;
