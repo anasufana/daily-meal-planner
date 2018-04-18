@@ -1,10 +1,10 @@
 /* global describe, it, browser, beforeEach */
 const expect = require('chai').expect;
 describe('Meal Planner App', () => {
-  const calories = '2000';
-  // beforeEach(() => {
-  //   browser.url('http://localhost:3000/');
-  // });
+  // const calories = '2000';
+  beforeEach(() => {
+    browser.url('http://localhost:3000/');
+  });
 
   it('Should load with the right title', () => {
     const actualTitle = browser.getTitle();
