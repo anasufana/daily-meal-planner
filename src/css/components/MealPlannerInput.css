@@ -1,44 +1,49 @@
 .meal-planner-input {
-  width: 600px;
-  margin: 2rem auto;
+  width: 550px;
+  margin: 4rem auto;
   padding: 2rem 0;
   border-top: 2px solid black; }
 
 .input-container {
   width: 100%;
   position: relative;
-  text-align: right;
+  text-align: left;
   padding: 0.75rem 0; }
-  .input-container .form-span {
-    margin-right: 1.5rem;
-    font-size: 1.6rem; }
-  .input-container .dropdown-select, .input-container .form-input-text, .input-container .form-input-warning {
-    width: 300px;
-    height: 50px;
-    border-radius: 5px;
-    border: 2px solid black;
-    transition: 0.25s all ease-in;
-    font-size: 1rem;
-    padding: 0.5rem;
-    font-family: 'Nanum Gothic', sans-serif; }
-    .input-container .dropdown-select:focus, .input-container .form-input-text:focus, .input-container .form-input-warning:focus {
-      outline: none;
-      border: 2px solid pink; }
-  .input-container .form-input-warning:focus {
+
+.input-container .form-span {
+  margin-right: 1.5rem;
+  font-size: 1.6rem;
+  margin-bottom: 10px; }
+
+.input-container .dropdown-select, .input-container .form-input-text, .input-container .form-input-warning {
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  border: 2px solid black;
+  transition: 0.25s all ease-in;
+  font-size: 1rem;
+  padding: 0.5rem;
+  margin-top: 10px;
+  font-family: 'Nanum Gothic', sans-serif; }
+  .input-container .dropdown-select:focus, .input-container .form-input-text:focus, .input-container .form-input-warning:focus {
+    outline: none;
+    border: 2px solid pink; }
+
+.input-container .form-input-info, .input-container .form-input-info-warning {
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  display: block;
+  text-align: left; }
+
+.input-container .form-input-warning:focus {
     border: 2px solid #a70505; }
-  .input-container .form-input-info, .input-container .form-input-info-warning {
-    font-size: 0.75rem;
-    margin-top: 0.25rem;
-    padding-left: 310px;
-    display: block;
-    text-align: left;
-    trnasition: 0.3s all ease-in; }
-  .input-container .form-input-info-warning {
+
+.input-container .form-input-info-warning {
     color: #a70505; }
 
 .submit-btn {
   height: 50px;
-  width: 300px;
+  width: 100%;
   border-radius: 5px;
   color: white;
   border: 2px solid black;
@@ -62,5 +67,11 @@
     border: 2px solid #7d7d7d;
     cursor: default; }
 
+
 .display-none {
   display: none; }
+
+@media screen and (max-width: 769px) {
+  .meal-planner-input {
+    margin-top: 1em; } }
+
