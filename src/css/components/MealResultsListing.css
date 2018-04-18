@@ -9,14 +9,14 @@ a:visited,
 a:link {
   color: #555; }
 
-.mealCaloriesLabel {
+.meal-calories-label {
   text-align: left;
   width: 55%;
   margin: 0 auto;
   padding-top: 20px;
   border-top: 1px solid rgba(0, 0, 0, 0.3); }
 
-.h3Calories {
+.h3-calories {
   display: inline-block;
   padding: 8px 10px;
   background-color: white;
@@ -45,10 +45,10 @@ a:link {
     display: grid;
     grid-template-columns: 1fr;
     grid-column-gap: 20px; }
-  .mealCaloriesLabel {
+  .meal-calories-label {
     width: 75%; } }
 
 @media only screen and (min-width: 769px) and (max-width: 1024px) {
   .meal-results-listing,
-  .mealCaloriesLabel {
+  .meal-calories-label {
     width: 75%; } }

@@ -3,27 +3,17 @@ import MealCard from './MealCard';
 import '../css/components/MealResultsListing.css';
 import '../css/components/MealCard.css';
 
-class MealResultsListing extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { 
-    };
-  }
-
-  render() {
-    return (
-    <div className="resultsContainer">
-      <div className="mealCaloriesLabel">
-        <h3 className="h3Calories">Total day calories: <span className="caloriesAmount">2800</span></h3>
-      </div>
-      <div className="meal-results-listing">
-        <MealCard />
-        <MealCard />
-        <MealCard />
-      </div>
+const MealResultsListing = () => (
+  <div className="results-container">
+    <div className="meal-calories-label">
+      <h3 className="h3-calories">Total day calories: <span className="calories-amount">2800</span></h3>
     </div>
-    );
-  }
-}
+    <div className="meal-results-listing">
+      <MealCard meal="breakfast" />
+      <MealCard meal="lunch" />
+      <MealCard meal="dinner" />
+    </div>
+  </div>
+);
 
 export default MealResultsListing;
