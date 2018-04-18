@@ -1,4 +1,26 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+# Daily Meal Planner
+An app where you can get a daily meal plan based on your diet, target calories and allergies. Using React for frontend and the Recipe-Food-Nutrition API.
+
+https://market.mashape.com/spoonacular/recipe-food-nutrition
+
+## How to
+### Setup
+`npm install`
+### Start
+`npm start`
+### Unit Test with Jest and Enzyme 
+`npm run test`
+### E2E Test with Selenium
+Run this the first time you setup your project
+`npm run selenium-setup` 
+
+Start: 
+`npm run selenium-start`
+`npm run e2e-tests`
+
+
+
+##### This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
