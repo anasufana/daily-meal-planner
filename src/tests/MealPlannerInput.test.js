@@ -21,7 +21,7 @@ describe('Meal Planner Input', () => {
     it.only('Should have "Good to go!" as default selection', () => {
       let mountComponent = mount(<MealPlannerInput />);
       // console.log(mountComponent.find('.dropdown-select'))
-      expect(mountComponent.find('.dropdown-select').childAt(0).prop('selected')).toEqual(true);
+      expect(mountComponent.find('.dropdown-select').childAt(0).prop('defaultValue')).toEqual(true);
     });
   });
 

@@ -12,7 +12,7 @@
   .input-container .form-span {
     margin-right: 1.5rem;
     font-size: 1.6rem; }
-  .input-container .dropdown-select, .input-container .form-input-text {
+  .input-container .dropdown-select, .input-container .form-input-text, .input-container .form-input-warning {
     width: 300px;
     height: 50px;
     border-radius: 5px;
@@ -21,15 +21,20 @@
     font-size: 1rem;
     padding: 0.5rem;
     font-family: 'Nanum Gothic', sans-serif; }
-    .input-container .dropdown-select:focus, .input-container .form-input-text:focus {
+    .input-container .dropdown-select:focus, .input-container .form-input-text:focus, .input-container .form-input-warning:focus {
       outline: none;
       border: 2px solid pink; }
-  .input-container .form-input-info {
+  .input-container .form-input-warning:focus {
+    border: 2px solid #a70505; }
+  .input-container .form-input-info, .input-container .form-input-info-warning {
     font-size: 0.75rem;
     margin-top: 0.25rem;
     padding-left: 310px;
     display: block;
-    text-align: left; }
+    text-align: left;
+    trnasition: 0.3s all ease-in; }
+  .input-container .form-input-info-warning {
+    color: #a70505; }
 
 .submit-btn {
   height: 50px;

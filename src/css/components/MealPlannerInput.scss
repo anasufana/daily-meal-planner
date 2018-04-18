@@ -16,7 +16,7 @@
     font-size: 1.6rem;
   }
 
-  .dropdown-select, .form-input-text {
+  .dropdown-select, .form-input-text, .form-input-warning {
     width: 300px;
     height: 50px;
     border-radius: 5px;
@@ -32,12 +32,23 @@
     }
   }
 
-  .form-input-info {
+  .form-input-warning {
+    &:focus {
+      border: 2px solid #a70505;
+    }
+  }
+
+  .form-input-info, .form-input-info-warning {
     font-size: 0.75rem;
     margin-top: 0.25rem;
     padding-left: 310px;
     display: block;
     text-align: left;
+    trnasition: 0.3s all ease-in;
+  }
+
+  .form-input-info-warning {
+    color: #a70505;
   }
 }
 

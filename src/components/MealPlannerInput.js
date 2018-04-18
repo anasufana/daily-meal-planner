@@ -6,6 +6,7 @@ class MealPlannerInput extends React.Component {
     super();
     this.state = {
       targetCaloriesValue: '',
+      excludeValue: '',
       diets: [
         { value: '', name: 'Good to go!', selected: true },
         { value: 'gluten free', name: 'Gluten free', selected: false },
@@ -14,24 +15,29 @@ class MealPlannerInput extends React.Component {
         { value: 'vegan', name: 'Vegan', selected: false },
         { value: 'pescetarian', name: 'Pescetarian', selected: false },
         { value: 'paleo', name: 'Paleo', selected: false },
-        { value: 'gluten free', name: 'Gluten free', selected: false },
       ],
     };
 
     this.handleTargetCalorieChange = this.handleTargetCalorieChange.bind(this);
+    this.handleExcludeValue = this.handleExcludeValue.bind(this);
   }
   handleTargetCalorieChange(e) {
     this.setState({ targetCaloriesValue: e.target.value });
   }
+
+  handleExcludeValue(e) {
+    this.setState({ excludeValue: e.target.value });
+  }
+
   render() {
     return (
       <div className="meal-planner-input">
-        <form action="">
+        <form onSubmit={(e) => { e.preventDefault(); }}>
           <div className="input-container">
             <span className="form-span">Choose your diet</span>
             <select className="dropdown-select">
               {this.state.diets.map(diet => (
-                <option key={diet.value} value={diet.value} selected={diet.selected}>
+                <option key={diet.value} value={diet.value} defaultValue={diet.selected}>
                   { diet.name }
                 </option>
               ))
@@ -43,21 +49,28 @@ class MealPlannerInput extends React.Component {
             <input
               className="form-input-text form-exclude"
               type="text"
+              value={this.state.excludeValue}
+              onChange={this.handleExcludeValue}
             /><br />
             <span className="form-input-info">
               Example: nuts, shallots - separated by comma.<br />
               Leave blank if you don&apos;t want to exclude anything
             </span>
           </div>
-          <div className="input-container">
+          <div className="input-container input-calories-container">
             <span className="form-span">Target calories*</span>
             <input
-              className="form-input-text"
+              className={(this.state.targetCaloriesValue >= 1000 &&
+              this.state.targetCaloriesValue <= 3500)
+               ? 'form-input-text form-calories' : 'form-input-warning form-calories'}
               type="text"
               value={this.state.targetCaloriesValue}
               onChange={this.handleTargetCalorieChange}
             /><br />
-            <span className="form-input-info">
+            <span className={(this.state.targetCaloriesValue >= 1000 &&
+              this.state.targetCaloriesValue <= 3500)
+               ? 'form-input-info' : 'form-input-info-warning'}
+            >
               Healthy target should be between 1000 and 3500
             </span>
           </div>
