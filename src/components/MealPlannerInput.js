@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../css/components/MealPlannerInput.css';
 
 class MealPlannerInput extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       targetCaloriesValue: '',
       diets: [
@@ -25,7 +26,10 @@ class MealPlannerInput extends React.Component {
   render() {
     return (
       <div className="meal-planner-input">
-        <form action="">
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          this.props.handleSubmit();
+        }}>
           <div className="input-container">
             <span className="form-span">Choose your diet</span>
             <select className="dropdown-select">
@@ -67,5 +71,8 @@ class MealPlannerInput extends React.Component {
   }
 }
 
+MealPlannerInput.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+};
 
 export default MealPlannerInput;
