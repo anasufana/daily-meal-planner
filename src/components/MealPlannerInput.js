@@ -33,6 +33,7 @@ class MealPlannerInput extends React.Component {
 
     this.handleTargetCalorieChange = this.handleTargetCalorieChange.bind(this);
     this.handleExcludeValue = this.handleExcludeValue.bind(this);
+    this.handleDietSelect = this.handleDietSelect.bind(this);
     this.validateCalories = this.validateCalories.bind(this);
   }
   validateCalories(calories) {
@@ -63,21 +64,34 @@ class MealPlannerInput extends React.Component {
     this.setState({ excludeValue: { ...this.state.excludeValue, value: e.target.value, warning } });
   }
 
+  handleDietSelect(e) {
+    const dietSelectedBefore = this.state.diets.filter(diet => diet.selected === true);
+    const dietSelectedNow = this.state.diets.filter(diet => diet.value === e.target.value);
+    const dietFiltered = this.state.diets.filter(diet =>
+      diet.value !== e.target.value && diet.selected !== true);
+
+    this.setState({
+      diets:
+      [...dietFiltered,
+        { ...dietSelectedBefore[0], selected: false },
+        { ...dietSelectedNow[0], selected: true }
+      ]
+    });
+  }
+
 
   render() {
     return (
       <div className="meal-planner-input">
-<<<<<<< HEAD
         <form onSubmit={(e) => {
           e.preventDefault();
-          this.props.handleSubmit();
-        }}>
-=======
-        <form onSubmit={(e) => { e.preventDefault(); }}>
->>>>>>> master
+          this.props.handleSubmit({...this.state});
+        }
+        }
+        >
           <div className="input-container">
             <span className="form-span">Choose your diet</span>
-            <select className="dropdown-select">
+            <select className="dropdown-select" onChange={this.handleDietSelect}>
               {this.state.diets.map(diet => (
                 <option key={diet.value} value={diet.value} defaultValue={diet.selected}>
                   { diet.name }
