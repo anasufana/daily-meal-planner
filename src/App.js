@@ -8,7 +8,7 @@ import MealResultsListing from './components/MealResultsListing';
 //var mykey = config.MY_KEY;
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-/*var request = require("request");
+var request = require("request");
 
 var options = { method: 'GET',
   url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/324694/analyzedInstructions',
@@ -25,7 +25,7 @@ request(options, function (error, response, body) {
 
   console.log(body);
 });
-*/
+
 
 const App = () => (
   <div className="App">
