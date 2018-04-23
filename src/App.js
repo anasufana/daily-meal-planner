@@ -21,7 +21,6 @@ class App extends React.Component {
 
     if (testing) {
       this.setState({ apiResponse: { ...mockAPIresponse } });
-      console.log(this.state.apiResponse);
     } else {
       const request = require("request");
       const API_KEY = process.env.REACT_APP_API_KEY;
@@ -33,6 +32,7 @@ class App extends React.Component {
         timeFrame: 'day',
       };
       const filteredDiet = params.diets.filter(diet => diet.selected === true);
+
 
       const requestObject = {
         ...defaultQueryObject,
@@ -63,8 +63,6 @@ class App extends React.Component {
 
         const apiResponse = body.json()
         this.setState({ apiResponse: { ...apiResponse } });
-        console.log(apiResponse);
-
       });
     }
   }

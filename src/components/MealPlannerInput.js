@@ -37,10 +37,8 @@ class MealPlannerInput extends React.Component {
     this.validateCalories = this.validateCalories.bind(this);
   }
   validateCalories(calories) {
-    if (calories) {
-      if (calories >= 1000 && calories <= 3500) {
-        return false;
-      }
+    if (calories >= 1000 && calories <= 3500) {
+      return false;
     }
     return true;
   }
