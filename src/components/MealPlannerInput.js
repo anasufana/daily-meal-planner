@@ -1,11 +1,12 @@
 /*eslint class-methods-use-this: ["error", { "exceptMethods": ["validateCalories"] }] */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../css/components/MealPlannerInput.css';
 
 class MealPlannerInput extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       targetCaloriesValue:
         {
@@ -32,6 +33,7 @@ class MealPlannerInput extends React.Component {
 
     this.handleTargetCalorieChange = this.handleTargetCalorieChange.bind(this);
     this.handleExcludeValue = this.handleExcludeValue.bind(this);
+    this.handleDietSelect = this.handleDietSelect.bind(this);
     this.validateCalories = this.validateCalories.bind(this);
   }
   validateCalories(calories) {
@@ -60,14 +62,34 @@ class MealPlannerInput extends React.Component {
     this.setState({ excludeValue: { ...this.state.excludeValue, value: e.target.value, warning } });
   }
 
+  handleDietSelect(e) {
+    const dietSelectedBefore = this.state.diets.filter(diet => diet.selected === true);
+    const dietSelectedNow = this.state.diets.filter(diet => diet.value === e.target.value);
+    const dietFiltered = this.state.diets.filter(diet =>
+      diet.value !== e.target.value && diet.selected !== true);
+
+    this.setState({
+      diets:
+      [...dietFiltered,
+        { ...dietSelectedBefore[0], selected: false },
+        { ...dietSelectedNow[0], selected: true }
+      ]
+    });
+  }
+
 
   render() {
     return (
       <div className="meal-planner-input">
-        <form onSubmit={(e) => { e.preventDefault(); }}>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          this.props.handleSubmit({...this.state});
+        }
+        }
+        >
           <div className="input-container">
             <span className="form-span">Choose your diet</span>
-            <select className="dropdown-select">
+            <select className="dropdown-select" onChange={this.handleDietSelect}>
               {this.state.diets.map(diet => (
                 <option key={diet.value} value={diet.value} defaultValue={diet.selected}>
                   { diet.name }
@@ -115,5 +137,8 @@ class MealPlannerInput extends React.Component {
   }
 }
 
+MealPlannerInput.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+};
 
 export default MealPlannerInput;

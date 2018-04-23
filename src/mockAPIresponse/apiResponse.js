@@ -1,0 +1,3 @@
+const apiResponse2 = {"meals":[{"id":516473,"title":"Salmon Artichoke Quiche","readyInMinutes":95,"image":"Salmon-Artichoke-Quiche-516473.png","imageUrls":["Salmon-Artichoke-Quiche-516473.png"]},{"id":220012,"title":"Thai pesto prawn noodles","readyInMinutes":20,"image":"Thai-pesto-prawn-noodles-220012.jpg","imageUrls":["Thai-pesto-prawn-noodles-220012.jpg"]},{"id":300236,"title":"Mahi Mahi with Mango-Vanilla Coulis","readyInMinutes":30,"image":"mahi-mahi-with-mango-vanilla-coulis-300236.jpeg","imageUrls":["mahi-mahi-with-mango-vanilla-coulis-300236.jpeg"]}],"nutrients":{"calories":1695.24,"protein":84.77,"fat":93.65,"carbohydrates":129.09}};
+
+export default apiResponse2;
