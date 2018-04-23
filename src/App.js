@@ -3,7 +3,7 @@ import './css/App.css';
 import Header from './components/Header';
 import MealPlannerInput from './components/MealPlannerInput';
 import MealResultsListing from './components/MealResultsListing';
-import mockAPIresponse from './mockAPIresponse/mockAPIresponse';
+import apiResponse2 from './mockAPIresponse/apiResponse';
 
 
 class App extends React.Component {
@@ -17,10 +17,10 @@ class App extends React.Component {
   }
 
   getMealPlan(params) {
-    const testing = true;
+    const testing = false;
 
     if (testing) {
-      this.setState({ apiResponse: { ...mockAPIresponse } });
+      this.setState({ apiResponse: { ...apiResponse2 } });
     } else {
       const request = require("request");
       const API_KEY = process.env.REACT_APP_API_KEY;
@@ -33,7 +33,6 @@ class App extends React.Component {
       };
       const filteredDiet = params.diets.filter(diet => diet.selected === true);
 
-
       const requestObject = {
         ...defaultQueryObject,
         diet: filteredDiet[0].value,
@@ -45,9 +44,10 @@ class App extends React.Component {
         .map(k => `${euc(k)}=${euc(requestObject[k])}`)
         .join('&');
       console.log(query);
+      console.log(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?${query}`);
       const options = {
         method: 'GET',
-        url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?diet=vegetarian&exclude=shellfish%2C+olives&targetCalories=2000&timeFrame=day',
+        url: `https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?${query}`,
         qs: { stepBreakdown: 'false' },
         headers:
          {
@@ -58,15 +58,13 @@ class App extends React.Component {
          }
       };
 
-      request(options, function (error, response, body) {
+      request(options, (error, response, body) => {
         if (error) throw new Error(error);
-
-        const apiResponse = body.json()
+        const apiResponse = JSON.parse(body);
         this.setState({ apiResponse: { ...apiResponse } });
       });
     }
   }
-
 
   render() {
     return (
