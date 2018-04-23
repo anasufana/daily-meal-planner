@@ -1,4 +1,5 @@
 import React from 'react';
+import request from 'request';
 import './css/App.css';
 import Header from './components/Header';
 import MealPlannerInput from './components/MealPlannerInput';
@@ -11,7 +12,7 @@ class App extends React.Component {
     super();
     this.state = {
       apiResponse: '',
-    }
+    };
 
     this.getMealPlan = this.getMealPlan.bind(this);
   }
@@ -22,7 +23,6 @@ class App extends React.Component {
     if (testing) {
       this.setState({ apiResponse: { ...apiResponse2 } });
     } else {
-      const request = require("request");
       const API_KEY = process.env.REACT_APP_API_KEY;
 
       const defaultQueryObject = {
@@ -37,14 +37,14 @@ class App extends React.Component {
         ...defaultQueryObject,
         diet: filteredDiet[0].value,
         exclude: params.excludeValue.value.toLowerCase(),
-        targetCalories: params.targetCaloriesValue.value}
+        targetCalories: params.targetCaloriesValue.value,
+      };
 
       const euc = encodeURIComponent;
       const query = Object.keys(requestObject)
         .map(k => `${euc(k)}=${euc(requestObject[k])}`)
         .join('&');
-      console.log(query);
-      console.log(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?${query}`);
+
       const options = {
         method: 'GET',
         url: `https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?${query}`,
@@ -54,12 +54,13 @@ class App extends React.Component {
            'Postman-Token': 'fd97f5de-ff8a-4f54-83c9-9a261d2e7e71',
            'Cache-Control': 'no-cache',
            'X-Mashape-Host': 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?timeFrame=day',
-           'X-Mashape-Key': API_KEY
-         }
+           'X-Mashape-Key': API_KEY,
+         },
       };
 
       request(options, (error, response, body) => {
         if (error) throw new Error(error);
+
         const apiResponse = JSON.parse(body);
         this.setState({ apiResponse: { ...apiResponse } });
       });
