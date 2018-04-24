@@ -3,7 +3,7 @@ import '../css/components/MealResultsListing.css';
 
 const MealCard = (props) => {
   return (
-    <div className="single-column">
+    <div className="single-column" onClick={() => props.handleMealRequest({...props.details})}>
       <h2 className="meal-title">{props.meal}</h2>
       <div className="img-container">
         <img className="image-recipe" src={`https://spoonacular.com/recipeImages/${props.details.image}`} alt="Breakfast-recipe" title="Breakfast-recipe"  />

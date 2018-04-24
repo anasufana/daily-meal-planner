@@ -3,7 +3,9 @@ import './css/App.css';
 import Header from './components/Header';
 import MealPlannerInput from './components/MealPlannerInput';
 import MealResultsListing from './components/MealResultsListing';
+import MealRecipe from './components/MealRecipe';
 import apiResponse2 from './mockAPIresponse/apiResponse';
+import mealStepsResponse from './mockAPIresponse/mealStepsResponse';
 
 
 class App extends React.Component {
@@ -11,9 +13,11 @@ class App extends React.Component {
     super();
     this.state = {
       apiResponse: '',
+      mealSteps: '',
     }
 
     this.getMealPlan = this.getMealPlan.bind(this);
+    this.getRecipeSteps = this.getRecipeSteps.bind(this);
   }
 
   getMealPlan(params) {
@@ -66,12 +70,31 @@ class App extends React.Component {
     }
   }
 
+  getRecipeSteps(params) {
+    this.setState({ mealSteps: { ...mealStepsResponse[0] } });
+    console.log(mealStepsResponse);
+    console.log(this.state.mealSteps);
+    console.log(params);
+  }
+
   render() {
     return (
       <div className="App">
         <Header />
         <MealPlannerInput handleSubmit={params => this.getMealPlan(params)} />
-        <MealResultsListing apiResponse={this.state.apiResponse} />
+        {
+          this.state.apiResponse && (
+            <MealResultsListing
+              apiResponse={this.state.apiResponse}
+              handleMealRequest={params => this.getRecipeSteps(params)}
+            />
+          )
+        }
+        {
+          this.state.mealSteps && (
+            <MealRecipe details={this.state.apiResponse.meals[0]} />
+          )
+        }
       </div>
     );
   }
