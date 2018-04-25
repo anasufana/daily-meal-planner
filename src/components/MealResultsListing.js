@@ -13,9 +13,9 @@ const MealResultsListing = (props) => {
           </h3>
         </div>
         <div className="meal-results-listing">
-          <MealCard meal="breakfast" details={props.apiResponse.meals[0]} />
-          <MealCard meal="lunch" details={props.apiResponse.meals[1]} />
-          <MealCard meal="dinner" details={props.apiResponse.meals[2]} />
+          <MealCard meal="breakfast" details={props.apiResponse.meals[0]} handleMealRequest={props.handleMealRequest} />
+          <MealCard meal="lunch" details={props.apiResponse.meals[1]} handleMealRequest={props.handleMealRequest} />
+          <MealCard meal="dinner" details={props.apiResponse.meals[2]} handleMealRequest={props.handleMealRequest} />
         </div>
       </div>
     );
