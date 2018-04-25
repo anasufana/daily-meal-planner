@@ -1,5 +1,4 @@
 import React from 'react';
-import Request from 'request';
 import './css/App.css';
 import Header from './components/Header';
 import MealPlannerInput from './components/MealPlannerInput';
@@ -17,7 +16,7 @@ class App extends React.Component {
   }
 
   getMealPlan(params) {
-    const testing = true;
+    const testing = false;
 
     if (testing) {
       this.setState({ apiResponse: { ...apiResponse2 } });
