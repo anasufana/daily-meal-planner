@@ -3,22 +3,26 @@
   margin: 0 auto;
   text-align: left;
   background-color: white;
-  padding: 1em; }
+  padding: 1em;
+  border-radius: 5px; }
 
 .recipe-title-page {
   padding: 1em; }
 
 .image-recipe-page {
   width: 100%;
-  height: 100%; }
+  height: 30vw;
+  object-fit: cover;
+  box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.1); }
 
 .section-ingredients {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr .5fr;
+  grid-template-columns: 2fr 1fr;
   grid-column-gap: 30px;
   background-color: beige;
-  padding: 2em 2em; }
+  padding: 2em 2em;
+  border-radius: 5px; }
 
 .ingredients-title,
 .step-title {
@@ -29,26 +33,36 @@
   padding-top: 30px; }
 
 .ingredients-box {
-  border-left: 1px solid grey; }
+  border-left: 1px solid rgba(0, 0, 0, 0.2); }
 
 .ingredients-list {
   padding-left: 40px; }
 
 .ingredients-list-item {
-  padding-bottom: 10px;
+  padding-bottom: 3px;
   font-size: 1.2rem; }
+
+.recipe-img-box {
+  position: relative; }
+
+.clock-div-container {
+  position: absolute;
+  top: 20px;
+  left: 20px; }
 
 .clock-div-button {
   position: relative; }
 
 .img-clock {
   left: 20px;
-  top: 9px;
+  top: 12px;
   position: absolute; }
 
 .recipe-duration-page {
-  padding: 10px 50px;
-  background-color: rgba(132, 221, 113, 0.4); }
+  padding: 10px 30px 10px 50px;
+  background-color: rgba(132, 221, 113, 0.8);
+  border-radius: 5px;
+  border: 2px solid #000; }
 
 .step-description {
   margin-left: 30px;
@@ -61,17 +75,14 @@
 @media only screen and (max-width: 1440px) and (min-width: 750px) {
   .recipe-page-container {
     width: 90%; }
-  .section-ingredients {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    background-color: beige;
-    padding: 2em 2em; }
   .ingredients-title {
     padding-top: 20px;
     padding-left: 20px; }
-  .ingredients-box {
-    border-left: none; } }
+  .image-recipe-page {
+    width: 100%;
+    height: 40vw;
+    -o-object-fit: cover;
+    object-fit: cover; } }
 
 @media screen and (max-width: 750px) {
   .recipe-page-container {
@@ -86,4 +97,9 @@
     padding-top: 20px;
     padding-left: 20px; }
   .ingredients-box {
-    border-left: none; } }
+    border-left: none; }
+  .image-recipe-page {
+    width: 100%;
+    height: 70vw;
+    -o-object-fit: cover;
+    object-fit: cover; } }

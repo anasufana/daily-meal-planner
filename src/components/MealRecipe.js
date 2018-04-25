@@ -8,6 +8,12 @@ const MealRecipe = props => (
     <div className="section-ingredients">
       <div className="recipe-img-box">
         <img className="image-recipe-page" src={`https://spoonacular.com/recipeImages/${props.details.recipeImage}`} alt="test-img" />
+        <div className="clock-div-container">
+          <div className="clock-div-button">
+            <img className="img-clock" src="/img/clock.svg" alt="Time" title="Time" height="20" width="20" />
+            <h3 className="recipe-duration-page">{ props.details.readyInMinutes }'</h3>
+          </div>
+        </div>
       </div>
       <div className="ingredients-box">
         <h2 className="ingredients-title">Ingredients:</h2>
@@ -18,10 +24,6 @@ const MealRecipe = props => (
            })
         }
         </ul>
-      </div>
-      <div className="clock-div-button">
-        <img className="img-clock" src="/img/clock.svg" alt="Time" title="Time" height="20" width="20" />
-        <h3 className="recipe-duration-page">{ props.details.readyInMinutes } min</h3>
       </div>
     </div>
     <div>
