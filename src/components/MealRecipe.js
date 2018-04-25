@@ -17,7 +17,7 @@ const MealRecipe = props => (
       </div>
       <div className="ingredients-box">
         <h2 className="ingredients-title">Ingredients:</h2>
-       <ul className="ingredients-list">
+        <ul className="ingredients-list">
           {
              props.details.ingredients[0].map((ingredient) => {
                return (<li className="ingredients-list-item">{ ingredient }</li>)
@@ -26,7 +26,7 @@ const MealRecipe = props => (
         </ul>
       </div>
     </div>
-        <div>
+    <div>
       {
       props.details.recipes[0].map((recipe, i) => {
         return (
