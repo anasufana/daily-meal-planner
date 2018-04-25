@@ -74,16 +74,16 @@ class App extends React.Component {
     // this.setState({ mealSteps: [...mealStepsResponse] });
 
     //params.id to use for fetch api
-
     const mealRecipe = {
       recipeTitle: params.title,
       recipeImage: params.image,
       readyInMinutes: params.readyInMinutes,
       recipes:
         [
+
           mealStepsResponse.map((meal) => {
-            let recipeIngredients = [];
-            let recipeSteps = [];
+            const recipeIngredients = [];
+            const recipeSteps = [];
 
             meal.steps.map((step) => {
               recipeSteps.push({ number: step.number, step: step.step });
@@ -103,8 +103,12 @@ class App extends React.Component {
         ],
     };
 
+    let mealIngredients = [];
+    mealRecipe.recipes[0].map(meal => (mealIngredients = [...mealIngredients, ...meal.ingredients]));
+    mealIngredients = mealIngredients.reduce((x, y) => (x.includes(y) ? x : [...x, y]), []);
+    mealRecipe.ingredients = [mealIngredients];
+
     this.setState({ mealRecipe: { ...mealRecipe } });
-    console.log(this.state.mealRecipe);
   }
 
   render() {

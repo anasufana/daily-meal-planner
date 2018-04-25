@@ -13,11 +13,9 @@ const MealRecipe = props => (
         <h2 className="ingredients-title">Ingredients:</h2>
         <ul className="ingredients-list">
           {
-             props.details.recipes[0].map(recipe => (
-             recipe.ingredients.map((ingredient) => {
-             return (<li className="ingredients-list-item">{ ingredient }</li>)
+             props.details.ingredients[0].map((ingredient) => {
+               return (<li className="ingredients-list-item">{ ingredient }</li>)
            })
-          ))
         }
         </ul>
       </div>
@@ -31,13 +29,13 @@ const MealRecipe = props => (
       props.details.recipes[0].map((recipe, i) => {
         return (
           <div>
-          <h1>{recipe.name ? recipe.name : 'Recipe Steps'}</h1>
-          {
-            recipe.steps.map((step, j) => {
-                  return (<RecipeStep key={`${i}${j}`} details={step} />)
-            })
-          }
-         </div>
+            <h1>{recipe.name ? recipe.name : 'Recipe Steps'}</h1>
+            {
+              recipe.steps.map((step, j) => {
+                    return (<RecipeStep key={`${i}${j}`} details={step} />)
+              })
+            }
+          </div>
         )
         })
       }
