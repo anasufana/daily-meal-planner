@@ -13,7 +13,7 @@ class App extends React.Component {
     super();
     this.state = {
       apiResponse: '',
-      mealSteps: '',
+      mealRecipe: '',
     }
 
     this.getMealPlan = this.getMealPlan.bind(this);
@@ -71,10 +71,40 @@ class App extends React.Component {
   }
 
   getRecipeSteps(params) {
-    this.setState({ mealSteps: { ...mealStepsResponse[0] } });
-    console.log(mealStepsResponse);
-    console.log(this.state.mealSteps);
-    console.log(params);
+    // this.setState({ mealSteps: [...mealStepsResponse] });
+
+    //params.id to use for fetch api
+
+    const mealRecipe = {
+      recipeTitle: params.title,
+      recipeImage: params.image,
+      readyInMinutes: params.readyInMinutes,
+      recipes:
+        [
+          mealStepsResponse.map((meal) => {
+            let recipeIngredients = [];
+            let recipeSteps = [];
+
+            meal.steps.map((step) => {
+              recipeSteps.push({ number: step.number, step: step.step });
+              step.ingredients.map(ingredient => (
+                recipeIngredients.push(ingredient.name)
+              ));
+            });
+
+            return (
+              {
+                name: meal.name,
+                ingredients: recipeIngredients,
+                steps: recipeSteps,
+              }
+            );
+          }),
+        ],
+    };
+
+    this.setState({ mealRecipe: { ...mealRecipe } });
+    console.log(this.state.mealRecipe);
   }
 
   render() {
@@ -91,8 +121,8 @@ class App extends React.Component {
           )
         }
         {
-          this.state.mealSteps && (
-            <MealRecipe details={this.state.apiResponse.meals[0]} />
+          this.state.mealRecipe && (
+            <MealRecipe details={this.state.mealRecipe} />
           )
         }
       </div>

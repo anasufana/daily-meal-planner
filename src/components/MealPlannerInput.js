@@ -47,7 +47,7 @@ class MealPlannerInput extends React.Component {
     const targetCalories = e.target.value;
     const warning = this.validateCalories(targetCalories);
     this.setState({
-      targetCaloriesValue: { ...this.state.targetCaloriesValue, value: e.target.value, warning }
+      targetCaloriesValue: { ...this.state.targetCaloriesValue, value: e.target.value, warning },
     });
   }
 
