@@ -1,4 +1,4 @@
-/* global it, expect */
+/* global it, expect, jest */
 
 import React from 'react';
 import { configure, shallow, mount } from 'enzyme';
@@ -91,3 +91,4 @@ describe("when `apiResponse` is undefined", () => {
 
 
 });
+
