@@ -12,13 +12,13 @@ const MealRecipe = props => (
       <div className="ingredients-box">
         <h2 className="ingredients-title">Ingredients:</h2>
         <ul className="ingredients-list">
-         {
-          props.details.recipes[0].map(recipe => (
-            recipe.ingredients.map((ingredient) => { 
-            return (<li className="ingredients-list-item">{ ingredient }</li>)})
+          {
+             props.details.recipes[0].map(recipe => (
+             recipe.ingredients.map((ingredient) => {
+             return (<li className="ingredients-list-item">{ ingredient }</li>)
+           })
           ))
         }
-  
         </ul>
       </div>
       <div className="clock-div-button">
@@ -27,14 +27,21 @@ const MealRecipe = props => (
       </div>
     </div>
     <div>
-    {
+      {
       props.details.recipes[0].map((recipe, i) => {
-      recipe.steps.map((step,j) => {
-            return (<RecipeStep key={`${i}${j}`} details={step} />)
-          });
+        return (
+          <div>
+          <h1>{recipe.name ? recipe.name : 'Recipe Steps'}</h1>
+          {
+            recipe.steps.map((step, j) => {
+                  return (<RecipeStep key={`${i}${j}`} details={step} />)
+            })
+          }
+         </div>
+        )
         })
       }
-      </div>
+    </div>
   </div>
 );
 
