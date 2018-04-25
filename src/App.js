@@ -7,6 +7,8 @@ import MealRecipe from './components/MealRecipe';
 import apiResponse2 from './mockAPIresponse/apiResponse';
 import mealStepsResponse from './mockAPIresponse/mealStepsResponse';
 
+const API_KEY = process.env.REACT_APP_API_KEY;
+
 class App extends React.Component {
   constructor() {
     super();
@@ -20,12 +22,11 @@ class App extends React.Component {
   }
 
   getMealPlan(params) {
-    const testing = false;
+    const testing = true;
 
     if (testing) {
       this.setState({ apiResponse: { ...apiResponse2 } });
     } else {
-      const API_KEY = process.env.REACT_APP_API_KEY;
 
       const defaultQueryObject = {
         diet: '',
@@ -64,43 +65,55 @@ class App extends React.Component {
 
   getRecipeSteps(params) {
     // this.setState({ mealSteps: [...mealStepsResponse] });
+    let apiResponse;
+    return fetch(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${params.id}/analyzedInstructions?stepBreakdown=true`,
+      {
+        method: 'GET',
+        headers: new Headers({
+          'X-Mashape-Key': API_KEY,
+          Accept: 'application/json',
+        }),
+      }
+    )
+      .then(body => body.json())
+      .then((body) => {
+        const mealRecipe = {
+          recipeTitle: params.title,
+          recipeImage: params.image,
+          readyInMinutes: params.readyInMinutes,
+          recipes:
+            [
 
-    //params.id to use for fetch api
-    const mealRecipe = {
-      recipeTitle: params.title,
-      recipeImage: params.image,
-      readyInMinutes: params.readyInMinutes,
-      recipes:
-        [
+              body.map((meal) => {
+                const recipeIngredients = [];
+                const recipeSteps = [];
 
-          mealStepsResponse.map((meal) => {
-            const recipeIngredients = [];
-            const recipeSteps = [];
+                meal.steps.map((step) => {
+                  recipeSteps.push({ number: step.number, step: step.step });
+                  step.ingredients.map(ingredient => (
+                    recipeIngredients.push(ingredient.name)
+                  ));
+                });
 
-            meal.steps.map((step) => {
-              recipeSteps.push({ number: step.number, step: step.step });
-              step.ingredients.map(ingredient => (
-                recipeIngredients.push(ingredient.name)
-              ));
-            });
+                return (
+                  {
+                    name: meal.name,
+                    ingredients: recipeIngredients,
+                    steps: recipeSteps,
+                  }
+                );
+              }),
+            ],
+        };
 
-            return (
-              {
-                name: meal.name,
-                ingredients: recipeIngredients,
-                steps: recipeSteps,
-              }
-            );
-          }),
-        ],
-    };
+        let mealIngredients = [];
+        mealRecipe.recipes[0].map(meal => (mealIngredients = [...mealIngredients, ...meal.ingredients]));
+        mealIngredients = mealIngredients.reduce((x, y) => (x.includes(y) ? x : [...x, y]), []);
+        mealRecipe.ingredients = [mealIngredients];
 
-    let mealIngredients = [];
-    mealRecipe.recipes[0].map(meal => (mealIngredients = [...mealIngredients, ...meal.ingredients]));
-    mealIngredients = mealIngredients.reduce((x, y) => (x.includes(y) ? x : [...x, y]), []);
-    mealRecipe.ingredients = [mealIngredients];
-
-    this.setState({ mealRecipe: { ...mealRecipe } });
+        this.setState({ mealRecipe: { ...mealRecipe } });
+      })
+      .catch(err => console.error(err));
   }
 
   render() {
