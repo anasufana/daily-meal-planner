@@ -31,7 +31,7 @@ const MealRecipe = props => (
       props.details.recipes[0].map((recipe, i) => {
         return (
           <div>
-            <h1>{recipe.name ? recipe.name : 'Recipe Steps'}</h1>
+            <h1 className="h1-recipe-steps">{recipe.name ? recipe.name : 'Recipe Steps'}</h1>
             {
               recipe.steps.map((step, j) => {
                     return (<RecipeStep key={`${i}${j}`} details={step} />)

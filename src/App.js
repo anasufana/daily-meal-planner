@@ -7,12 +7,16 @@ import MealRecipe from './components/MealRecipe';
 import apiResponse2 from './mockAPIresponse/apiResponse';
 import mealStepsResponse from './mockAPIresponse/mealStepsResponse';
 
+const API_KEY = process.env.REACT_APP_API_KEY;
+
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       apiResponse: '',
+      apiResponseError: false,
       mealRecipe: '',
+      testing: false,
     };
 
     this.getMealPlan = this.getMealPlan.bind(this);
@@ -20,13 +24,9 @@ class App extends React.Component {
   }
 
   getMealPlan(params) {
-    const testing = false;
-
-    if (testing) {
+    if (this.state.testing) {
       this.setState({ apiResponse: { ...apiResponse2 } });
     } else {
-      const API_KEY = process.env.REACT_APP_API_KEY;
-
       const defaultQueryObject = {
         diet: '',
         exclude: '',
@@ -57,15 +57,38 @@ class App extends React.Component {
         }
       )
         .then(body => body.json())
-        .then(body => this.setState({ apiResponse: { ...body } }))
+        .then((body) => {
+          if (!body.status) {
+            this.setState({ apiResponse: { ...body } });
+            this.setState({ apiResponseError: false });
+          } else {
+            this.setState({ apiResponseError: true });
+            this.setState({ apiResponse: '' });
+          }
+        })
         .catch(err => console.error(err));
     }
   }
 
   getRecipeSteps(params) {
-    // this.setState({ mealSteps: [...mealStepsResponse] });
+    if(this.state.testing) {
+      this.filterRecipeData(params, mealStepsResponse);
+    }
+    return fetch(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${params.id}/analyzedInstructions?stepBreakdown=true`,
+      {
+        method: 'GET',
+        headers: new Headers({
+          'X-Mashape-Key': API_KEY,
+          Accept: 'application/json',
+        }),
+      }
+    )
+      .then(body => body.json())
+      .then(body => this.filterRecipeData(params, body))
+      .catch(err => console.error(err));
+  }
 
-    //params.id to use for fetch api
+  filterRecipeData(params, stepsResponse) {
     const mealRecipe = {
       recipeTitle: params.title,
       recipeImage: params.image,
@@ -73,7 +96,7 @@ class App extends React.Component {
       recipes:
         [
 
-          mealStepsResponse.map((meal) => {
+          stepsResponse.map((meal) => {
             const recipeIngredients = [];
             const recipeSteps = [];
 
@@ -115,6 +138,14 @@ class App extends React.Component {
               handleMealRequest={params => this.getRecipeSteps(params)}
             />
           )
+        }
+        {
+          this.state.apiResponseError && (
+            <h2 className="meal-results-error">
+              Ooops! We can&apos;t seem to find a meal plan with theese requirements.<br />
+              Please try again!
+            </h2>
+           )
         }
         {
           this.state.mealRecipe && (
