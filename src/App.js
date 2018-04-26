@@ -17,7 +17,7 @@ class App extends React.Component {
       apiResponse: '',
       apiResponseError: false,
       mealRecipe: '',
-      testing: true,
+      testing: false,
     };
 
     this.getMealPlan = this.getMealPlan.bind(this);
@@ -76,7 +76,7 @@ class App extends React.Component {
   getRecipeSteps(params) {
     if(this.state.testing) {
       this.filterRecipeData(params, mealStepsResponse);
-      this.props.history.push('/recipe');
+      // this.props.history.push('/recipe');
     }
     return fetch(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${params.id}/analyzedInstructions?stepBreakdown=true`,
       {
@@ -89,7 +89,6 @@ class App extends React.Component {
     )
       .then(body => body.json())
       .then(body => this.filterRecipeData(params, body))
-      .then(this.props.history.push('/recipe'))
       .catch(err => console.error(err));
   }
 
@@ -129,6 +128,7 @@ class App extends React.Component {
     mealRecipe.ingredients = [mealIngredients];
 
     this.setState({ mealRecipe: { ...mealRecipe } });
+    this.props.history.push('/recipe');
   }
 
   render() {

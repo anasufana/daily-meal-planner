@@ -2,7 +2,9 @@
   margin-bottom: 2rem; }
 
 .logo {
-  animation: Scale-logo 1s ease-in; }
+  animation: Scale-logo 1s ease-in;
+  width: 150px;
+  height: 150px; }
 
 .logo-title {
   margin-top: 0;
