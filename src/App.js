@@ -1,3 +1,4 @@
+import { Route, withRouter } from 'react-router-dom';
 import React from 'react';
 import './css/App.css';
 import Header from './components/Header';
@@ -7,12 +8,16 @@ import MealRecipe from './components/MealRecipe';
 import apiResponse2 from './mockAPIresponse/apiResponse';
 import mealStepsResponse from './mockAPIresponse/mealStepsResponse';
 
+const API_KEY = process.env.REACT_APP_API_KEY;
+
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       apiResponse: '',
+      apiResponseError: false,
       mealRecipe: '',
+      testing: false,
     };
 
     this.getMealPlan = this.getMealPlan.bind(this);
@@ -20,13 +25,11 @@ class App extends React.Component {
   }
 
   getMealPlan(params) {
-    const testing = true;
 
-    if (testing) {
+    if (this.state.testing) {
       this.setState({ apiResponse: { ...apiResponse2 } });
+      this.props.history.push('/results');
     } else {
-      const API_KEY = process.env.REACT_APP_API_KEY;
-
       const defaultQueryObject = {
         diet: '',
         exclude: '',
@@ -57,15 +60,40 @@ class App extends React.Component {
         }
       )
         .then(body => body.json())
-        .then(body => this.setState({ apiResponse: { ...body } }))
+        .then((body) => {
+          if (!body.status) {
+            this.setState({ apiResponse: { ...body } });
+            this.setState({ apiResponseError: false });
+          } else {
+            this.setState({ apiResponseError: true });
+            this.setState({ apiResponse: '' });
+          }
+          this.props.history.push('/results');
+        })
         .catch(err => console.error(err));
     }
   }
 
   getRecipeSteps(params) {
-    // this.setState({ mealSteps: [...mealStepsResponse] });
+    if(this.state.testing) {
+      this.filterRecipeData(params, mealStepsResponse);
+      // this.props.history.push('/recipe');
+    }
+    return fetch(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${params.id}/analyzedInstructions?stepBreakdown=true`,
+      {
+        method: 'GET',
+        headers: new Headers({
+          'X-Mashape-Key': API_KEY,
+          Accept: 'application/json',
+        }),
+      }
+    )
+      .then(body => body.json())
+      .then(body => this.filterRecipeData(params, body))
+      .catch(err => console.error(err));
+  }
 
-    //params.id to use for fetch api
+  filterRecipeData(params, stepsResponse) {
     const mealRecipe = {
       recipeTitle: params.title,
       recipeImage: params.image,
@@ -73,7 +101,7 @@ class App extends React.Component {
       recipes:
         [
 
-          mealStepsResponse.map((meal) => {
+          stepsResponse.map((meal) => {
             const recipeIngredients = [];
             const recipeSteps = [];
 
@@ -101,29 +129,63 @@ class App extends React.Component {
     mealRecipe.ingredients = [mealIngredients];
 
     this.setState({ mealRecipe: { ...mealRecipe } });
+    this.props.history.push('/recipe');
   }
 
   render() {
     return (
       <div className="App">
         <Header />
-        <MealPlannerInput handleSubmit={params => this.getMealPlan(params)} />
-        {
-          this.state.apiResponse && (
-            <MealResultsListing
-              apiResponse={this.state.apiResponse}
-              handleMealRequest={params => this.getRecipeSteps(params)}
-            />
-          )
-        }
-        {
-          this.state.mealRecipe && (
-            <MealRecipe details={this.state.mealRecipe} />
-          )
-        }
+        <div>
+          <Route
+            exact path="/"
+            render={() => (
+              <MealPlannerInput handleSubmit={params => this.getMealPlan(params)} />
+            )}
+          />
+          <Route
+            path="/results"
+            render={() => (
+              <MealResultsListing
+                apiResponse={this.state.apiResponse}
+                error={this.state.apiResponseError}
+                handleMealRequest={params => this.getRecipeSteps(params)}
+              />
+            )}
+          />
+          <Route
+            path="/recipe"
+            render={() => (
+              <MealRecipe details={this.state.mealRecipe} />
+            )}
+          />
+        </div>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
+//
+// <MealPlannerInput handleSubmit={params => this.getMealPlan(params)} />
+// {
+//   this.state.apiResponse && (
+//     <MealResultsListing
+//       apiResponse={this.state.apiResponse}
+//       handleMealRequest={params => this.getRecipeSteps(params)}
+//     />
+//   )
+// }
+// {
+//   this.state.apiResponseError && (
+//     <h2 className="meal-results-error">
+//       Ooops! We can&apos;t seem to find a meal plan with theese requirements.<br />
+//       Please try again!
+//     </h2>
+//    )
+// }
+// {
+//   this.state.mealRecipe && (
+//     <MealRecipe details={this.state.mealRecipe} />
+//   )
+// }

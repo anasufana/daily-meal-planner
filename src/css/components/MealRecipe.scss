@@ -1,6 +1,6 @@
 .recipe-page-container {
   width: 55%;
-  margin: 0 auto;
+  margin: 1rem auto 0;
   text-align: left;
   background-color: white;
   padding: 1em;
@@ -21,7 +21,7 @@
   grid-template-columns: 2fr 1fr;
   grid-column-gap: 30px;
   background-color: beige;
-  padding: 2em 2em; 
+  padding: 2em 2em;
   border-radius: 5px;
 }
 .ingredients-title,
@@ -51,7 +51,7 @@
   left: 20px;
 }
 .clock-div-button {
-  position: relative; 
+  position: relative;
 }
 .img-clock {
   left: 20px;
@@ -72,9 +72,19 @@
   padding-bottom: 20px;
   border-bottom: 1px solid rgba(0,0,0,.3);
 }
+
+.h1-recipe-steps {
+  margin-top: 20px;
+  font-size: 1.5em;
+  background: rgba(132,221,113,.8);
+  display: inline-block;
+  margin-left: 30px;
+  padding: 10px;
+  border-radius: 5px;
+}
 @media only screen and (max-width: 1440px) and (min-width: 750px) {
   .recipe-page-container {
-    width: 90%;
+    width: 70%;
   }
   .ingredients-title {
     padding-top: 20px;
@@ -97,14 +107,14 @@
     display: grid;
     grid-template-columns: 1fr;
     background-color: beige;
-    padding: 2em 2em; 
+    padding: 2em 2em;
   }
   .ingredients-title {
     padding-top: 20px;
     padding-left: 20px;
   }
   .ingredients-box {
-    border-left: none;  
+    border-left: none;
   }
   .image-recipe-page {
     width: 100%;

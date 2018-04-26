@@ -1,9 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../css/components/MealRecipe.css';
 import RecipeStep from './RecipeStep';
 
 const MealRecipe = props => (
-  <div className="recipe-page-container">
+  <div className="recipe-page-container slide-in-1">
+    <Link to="/results" className="back-link">&lt; Back to results</Link>
     <h1 className="recipe-title-page">{ props.details.recipeTitle }</h1>
     <div className="section-ingredients">
       <div className="recipe-img-box">
@@ -31,7 +33,7 @@ const MealRecipe = props => (
       props.details.recipes[0].map((recipe, i) => {
         return (
           <div>
-            <h1>{recipe.name ? recipe.name : 'Recipe Steps'}</h1>
+            <h1 className="h1-recipe-steps">{recipe.name ? recipe.name : 'Recipe Steps'}</h1>
             {
               recipe.steps.map((step, j) => {
                     return (<RecipeStep key={`${i}${j}`} details={step} />)
