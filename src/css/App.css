@@ -10,3 +10,46 @@
   display: inline-block;
   border: 2px solid black;
   line-height: 1.5; }
+
+.back-link {
+  position: fixed;
+  left: 0;
+  color: black !important;
+  font-weight: 800;
+  top: 1rem;
+  padding: 0.5rem;
+  border-radius: 0 5px 5px 0;
+  background: white;
+  transition: 0.3s all ease-in;
+  z-index: 999; }
+  .back-link:hover {
+    padding-left: 1rem; }
+  @media screen and (max-width: 900px) {
+    .back-link {
+      top: 0;
+      width: 100%;
+      text-align: left;
+      padding: 0.75rem;
+      border-bottom: 1px solid #333;
+      background: rgba(255, 255, 255, 0.9); }
+      .back-link:hover {
+        padding-left: 1rem;
+        background: white; } }
+
+.slide-in-1 {
+  animation-duration: 0.5s;
+  animation-name: slidein; }
+
+.slide-in-2 {
+  animation-duration: 0.75s;
+  animation-name: slidein; }
+
+.slide-in-3 {
+  animation-duration: 1s;
+  animation-name: slidein; }
+
+@keyframes slidein {
+  from {
+    margin-top: 50%; }
+  to {
+    margin-top: 0%; } }

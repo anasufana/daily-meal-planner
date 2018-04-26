@@ -1,7 +1,7 @@
 .meal-planner-input {
   width: 550px;
-  margin: 4rem auto;
-  padding: 2rem 0;
+  margin: 2rem auto 5rem;
+  padding: 1.5rem 0;
   border-top: 2px solid black; }
 
 .input-container {
@@ -70,7 +70,3 @@
 
 .display-none {
   display: none; }
-
-@media screen and (max-width: 769px) {
-  .meal-planner-input {
-    margin-top: 1em; } }
