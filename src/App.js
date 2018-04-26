@@ -14,7 +14,9 @@ class App extends React.Component {
     super();
     this.state = {
       apiResponse: '',
+      apiResponseError: false,
       mealRecipe: '',
+      testing: false,
     };
 
     this.getMealPlan = this.getMealPlan.bind(this);
@@ -22,12 +24,9 @@ class App extends React.Component {
   }
 
   getMealPlan(params) {
-    const testing = true;
-
-    if (testing) {
+    if (this.state.testing) {
       this.setState({ apiResponse: { ...apiResponse2 } });
     } else {
-
       const defaultQueryObject = {
         diet: '',
         exclude: '',
@@ -58,14 +57,23 @@ class App extends React.Component {
         }
       )
         .then(body => body.json())
-        .then(body => this.setState({ apiResponse: { ...body } }))
+        .then((body) => {
+          if (!body.status) {
+            this.setState({ apiResponse: { ...body } });
+            this.setState({ apiResponseError: false });
+          } else {
+            this.setState({ apiResponseError: true });
+            this.setState({ apiResponse: '' });
+          }
+        })
         .catch(err => console.error(err));
     }
   }
 
   getRecipeSteps(params) {
-    // this.setState({ mealSteps: [...mealStepsResponse] });
-    let apiResponse;
+    if(this.state.testing) {
+      this.filterRecipeData(params, mealStepsResponse);
+    }
     return fetch(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${params.id}/analyzedInstructions?stepBreakdown=true`,
       {
         method: 'GET',
@@ -76,44 +84,46 @@ class App extends React.Component {
       }
     )
       .then(body => body.json())
-      .then((body) => {
-        const mealRecipe = {
-          recipeTitle: params.title,
-          recipeImage: params.image,
-          readyInMinutes: params.readyInMinutes,
-          recipes:
-            [
-
-              body.map((meal) => {
-                const recipeIngredients = [];
-                const recipeSteps = [];
-
-                meal.steps.map((step) => {
-                  recipeSteps.push({ number: step.number, step: step.step });
-                  step.ingredients.map(ingredient => (
-                    recipeIngredients.push(ingredient.name)
-                  ));
-                });
-
-                return (
-                  {
-                    name: meal.name,
-                    ingredients: recipeIngredients,
-                    steps: recipeSteps,
-                  }
-                );
-              }),
-            ],
-        };
-
-        let mealIngredients = [];
-        mealRecipe.recipes[0].map(meal => (mealIngredients = [...mealIngredients, ...meal.ingredients]));
-        mealIngredients = mealIngredients.reduce((x, y) => (x.includes(y) ? x : [...x, y]), []);
-        mealRecipe.ingredients = [mealIngredients];
-
-        this.setState({ mealRecipe: { ...mealRecipe } });
-      })
+      .then(body => this.filterRecipeData(params, body))
       .catch(err => console.error(err));
+  }
+
+  filterRecipeData(params, stepsResponse) {
+    const mealRecipe = {
+      recipeTitle: params.title,
+      recipeImage: params.image,
+      readyInMinutes: params.readyInMinutes,
+      recipes:
+        [
+
+          stepsResponse.map((meal) => {
+            const recipeIngredients = [];
+            const recipeSteps = [];
+
+            meal.steps.map((step) => {
+              recipeSteps.push({ number: step.number, step: step.step });
+              step.ingredients.map(ingredient => (
+                recipeIngredients.push(ingredient.name)
+              ));
+            });
+
+            return (
+              {
+                name: meal.name,
+                ingredients: recipeIngredients,
+                steps: recipeSteps,
+              }
+            );
+          }),
+        ],
+    };
+
+    let mealIngredients = [];
+    mealRecipe.recipes[0].map(meal => (mealIngredients = [...mealIngredients, ...meal.ingredients]));
+    mealIngredients = mealIngredients.reduce((x, y) => (x.includes(y) ? x : [...x, y]), []);
+    mealRecipe.ingredients = [mealIngredients];
+
+    this.setState({ mealRecipe: { ...mealRecipe } });
   }
 
   render() {
@@ -128,6 +138,14 @@ class App extends React.Component {
               handleMealRequest={params => this.getRecipeSteps(params)}
             />
           )
+        }
+        {
+          this.state.apiResponseError && (
+            <h2 className="meal-results-error">
+              Ooops! We can&apos;t seem to find a meal plan with theese requirements.<br />
+              Please try again!
+            </h2>
+           )
         }
         {
           this.state.mealRecipe && (
