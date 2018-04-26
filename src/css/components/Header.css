@@ -1,3 +1,6 @@
+.header {
+  margin-bottom: 2rem; }
+
 .logo {
   animation: Scale-logo 1s ease-in; }
 
@@ -15,7 +18,9 @@
   60% {
     transform: scale(1); } }
 
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 800px) {
+  .header {
+    margin: 3rem 0 1rem 0; }
   .logo {
     width: 100px;
     height: 100px; }
