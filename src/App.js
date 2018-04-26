@@ -25,6 +25,7 @@ class App extends React.Component {
   }
 
   getMealPlan(params) {
+
     if (this.state.testing) {
       this.setState({ apiResponse: { ...apiResponse2 } });
       this.props.history.push('/results');
