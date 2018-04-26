@@ -20,7 +20,7 @@ class App extends React.Component {
   }
 
   getMealPlan(params) {
-    const testing = false;
+    const testing = true;
 
     if (testing) {
       this.setState({ apiResponse: { ...apiResponse2 } });

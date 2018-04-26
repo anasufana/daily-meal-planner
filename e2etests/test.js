@@ -9,7 +9,7 @@ describe('Meal Planner App', () => {
     const actualTitle = browser.getTitle();
     expect(actualTitle).to.eql('Daily Meal Planner');
   });
- 
+
   describe('Calories Input', () => {
     it('Should give a warning if calories are lower than 1000', () => {
       browser.element('.form-calories').setValue('999');
@@ -21,7 +21,7 @@ describe('Meal Planner App', () => {
       expect(browser.getText('.form-input-info=Healthy target should be between 1000 and 3500')).to.eql('Healthy target should be between 1000 and 3500');
     });
   });
-  
+
   describe('The submit button', () => {
     it('Should be disabled when the calories and exclude are empty', () => {
       expect(browser.isEnabled('.submit-btn')).to.eql(false);
@@ -29,8 +29,24 @@ describe('Meal Planner App', () => {
 
     it('Should be enabled when the calories are 1200 and exclude values are "nuts, banana"', () => {
       browser.element('.form-calories').setValue('1200');
-      browser.element('.form-exclude').setValue('nuts, banana'); 
+      browser.element('.form-exclude').setValue('nuts, banana');
       expect(browser.isEnabled('.submit-btn')).to.eql(true);
     });
+  });
+
+  it('Should get a meal plan when calories are set', () =>{
+    browser.element('.form-calories').setValue('1800');
+    browser.click('.submit-btn');
+    expect(browser.isVisible('.results-container')).to.eql(true);
+  });
+
+  it('Should get a meal plan when calories and diet are set');
+
+  it('Should show the meal recipe when the meal card is clicked', () => {
+    browser.element('.form-calories').setValue('1800');
+    browser.click('.submit-btn');
+    browser.click('.single-column');
+
+    expect(browser.isVisible('.recipe-page-container')).to.eql(true);
   });
 });
