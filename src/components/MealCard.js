@@ -13,12 +13,10 @@ const MealCard = props => (
     <h2 className="meal-title">{props.meal}</h2>
     <div className="img-container">
       <img className="image-recipe" src={`https://spoonacular.com/recipeImages/${props.details.image}`} alt="Breakfast-recipe" title="Breakfast-recipe" />
-      <a href="/">
-        <div className="hover-box">
-          <h3 className="hover-title">Time to cook!</h3>
-          <img className="img-cooking" src="/img/cooking.svg" alt="Time" title="Time" height="60" width="60" />
-        </div>
-      </a>
+      <div className="hover-box">
+        <h3 className="hover-title">Time to cook!</h3>
+        <img className="img-cooking" src="/img/cooking.svg" alt="Time" title="Time" height="60" width="60" />
+      </div>
     </div>
     <div className="meal-details-container">
       <div className="meal-details">

@@ -65,11 +65,11 @@ const MealPlannerInput = props => (
 MealPlannerInput.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   handleDietSelect: PropTypes.func.isRequired,
-  diets: PropTypes.shape({
+  diets: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     selected: PropTypes.bool.isRequired,
-  }).isRequired,
+  }).isRequired).isRequired,
   excludeValue: PropTypes.shape({
     value: PropTypes.string.isRequired,
     warning: PropTypes.bool.isRequired,

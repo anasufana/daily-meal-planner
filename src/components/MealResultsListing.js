@@ -23,13 +23,13 @@ const MealResultsListing = props => (
 
 MealResultsListing.propTypes = {
   apiResponse: PropTypes.shape({
-    meals: PropTypes.shape({
+    meals: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
       image: PropTypes.string.isRequired,
       imagrUrls: PropTypes.string,
       readyInMinutes: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
-    }).isRequired,
+    }).isRequired).isRequired,
     nutrients: PropTypes.shape({
       calories: PropTypes.number.isRequired,
       carbohydrates: PropTypes.number.isRequired,

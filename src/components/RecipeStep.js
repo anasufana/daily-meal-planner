@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../css/components/MealRecipe.css';
 
 const RecipeStep = props => (
@@ -7,5 +8,12 @@ const RecipeStep = props => (
     <p className="step-description">{ props.details.step }</p>
   </div>
 );
+
+RecipeStep.propTypes = {
+  details: PropTypes.shape({
+    number: PropTypes.number.isRequired,
+    step: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default RecipeStep;
