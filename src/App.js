@@ -1,9 +1,13 @@
+/* eslint no-return-assign: ["error", "always"] */
+/* global fetch, Headers */
+
 import { Route, withRouter } from 'react-router-dom';
 import React from 'react';
 import './css/App.css';
 import Header from './components/Header';
-import MealPlannerInput from './components/MealPlannerInput';
-import MealResultsListing from './components/MealResultsListing';
+import MealPlannerInputContainer from './components/MealPlannerInputContainer';
+import MealResultsListingContainer from './components/MealResultsListingContainer';
+
 import MealRecipe from './components/MealRecipe';
 import apiResponse2 from './mockAPIresponse/apiResponse';
 import mealStepsResponse from './mockAPIresponse/mealStepsResponse';
@@ -11,13 +15,13 @@ import mealStepsResponse from './mockAPIresponse/mealStepsResponse';
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       apiResponse: '',
       apiResponseError: false,
       mealRecipe: '',
-      testing: false,
+      testing: true,
     };
 
     this.getMealPlan = this.getMealPlan.bind(this);
@@ -25,10 +29,9 @@ class App extends React.Component {
   }
 
   getMealPlan(params) {
-
     if (this.state.testing) {
       this.setState({ apiResponse: { ...apiResponse2 } });
-      this.props.history.push('/results');
+      this.props.history.push('/results'); //eslint-disable-line
     } else {
       const defaultQueryObject = {
         diet: '',
@@ -50,14 +53,15 @@ class App extends React.Component {
         .map(k => `${euc(k)}=${euc(requestObject[k])}`)
         .join('&');
 
-      return fetch(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?${query}&stepBreakdown=false`,
+      fetch(
+        `https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?${query}&stepBreakdown=false`,
         {
           method: 'GET',
           headers: new Headers({
             'X-Mashape-Key': API_KEY,
             Accept: 'application/json',
           }),
-        }
+        },
       )
         .then(body => body.json())
         .then((body) => {
@@ -70,27 +74,28 @@ class App extends React.Component {
           }
           this.props.history.push('/results');
         })
-        .catch(err => console.error(err));
+        .catch(err => console.error(err)); //eslint-disable-line
     }
   }
 
   getRecipeSteps(params) {
-    if(this.state.testing) {
+    if (this.state.testing) {
       this.filterRecipeData(params, mealStepsResponse);
-      // this.props.history.push('/recipe');
+    } else {
+      fetch(
+        `https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${params.id}/analyzedInstructions?stepBreakdown=true`,
+        {
+          method: 'GET',
+          headers: new Headers({
+            'X-Mashape-Key': API_KEY,
+            Accept: 'application/json',
+          }),
+        },
+      )
+        .then(body => body.json())
+        .then(body => this.filterRecipeData(params, body))
+        .catch(err => console.error(err)); //eslint-disable-line
     }
-    return fetch(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${params.id}/analyzedInstructions?stepBreakdown=true`,
-      {
-        method: 'GET',
-        headers: new Headers({
-          'X-Mashape-Key': API_KEY,
-          Accept: 'application/json',
-        }),
-      }
-    )
-      .then(body => body.json())
-      .then(body => this.filterRecipeData(params, body))
-      .catch(err => console.error(err));
   }
 
   filterRecipeData(params, stepsResponse) {
@@ -107,7 +112,7 @@ class App extends React.Component {
 
             meal.steps.map((step) => {
               recipeSteps.push({ number: step.number, step: step.step });
-              step.ingredients.map(ingredient => (
+              return step.ingredients.map(ingredient => (
                 recipeIngredients.push(ingredient.name)
               ));
             });
@@ -124,7 +129,11 @@ class App extends React.Component {
     };
 
     let mealIngredients = [];
-    mealRecipe.recipes[0].map(meal => (mealIngredients = [...mealIngredients, ...meal.ingredients]));
+    mealRecipe.recipes[0]
+      .map((meal) => {
+        mealIngredients = [...mealIngredients, ...meal.ingredients];
+        return true;
+      });
     mealIngredients = mealIngredients.reduce((x, y) => (x.includes(y) ? x : [...x, y]), []);
     mealRecipe.ingredients = [mealIngredients];
 
@@ -138,15 +147,16 @@ class App extends React.Component {
         <Header />
         <div>
           <Route
-            exact path="/"
+            exact
+            path="/"
             render={() => (
-              <MealPlannerInput handleSubmit={params => this.getMealPlan(params)} />
+              <MealPlannerInputContainer handleSubmit={params => this.getMealPlan(params)} />
             )}
           />
           <Route
             path="/results"
             render={() => (
-              <MealResultsListing
+              <MealResultsListingContainer
                 apiResponse={this.state.apiResponse}
                 error={this.state.apiResponseError}
                 handleMealRequest={params => this.getRecipeSteps(params)}
@@ -166,26 +176,3 @@ class App extends React.Component {
 }
 
 export default withRouter(App);
-//
-// <MealPlannerInput handleSubmit={params => this.getMealPlan(params)} />
-// {
-//   this.state.apiResponse && (
-//     <MealResultsListing
-//       apiResponse={this.state.apiResponse}
-//       handleMealRequest={params => this.getRecipeSteps(params)}
-//     />
-//   )
-// }
-// {
-//   this.state.apiResponseError && (
-//     <h2 className="meal-results-error">
-//       Ooops! We can&apos;t seem to find a meal plan with theese requirements.<br />
-//       Please try again!
-//     </h2>
-//    )
-// }
-// {
-//   this.state.mealRecipe && (
-//     <MealRecipe details={this.state.mealRecipe} />
-//   )
-// }
