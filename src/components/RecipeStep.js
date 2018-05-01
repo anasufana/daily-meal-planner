@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/components/MealRecipe.css';
+import '../css/components/MealCaloriesDonut.css';
 
 const RecipeStep = props => (
   <div className="steps-container">

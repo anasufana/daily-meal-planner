@@ -4,6 +4,7 @@ import './css/App.css';
 import Header from './components/Header';
 import MealPlannerInput from './components/MealPlannerInput';
 import MealResultsListing from './components/MealResultsListing';
+import MealCaloriesDonut from './components/MealCaloriesDonut';
 import MealRecipe from './components/MealRecipe';
 import apiResponse2 from './mockAPIresponse/apiResponse';
 import mealStepsResponse from './mockAPIresponse/mealStepsResponse';
@@ -17,7 +18,7 @@ class App extends React.Component {
       apiResponse: '',
       apiResponseError: false,
       mealRecipe: '',
-      testing: false,
+      testing: true,
     };
 
     this.getMealPlan = this.getMealPlan.bind(this);
