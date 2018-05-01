@@ -1,33 +1,29 @@
-/*import React from 'react';
-import { configure, shallow, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import App from '../App';
+/* global it, expect, jest */
+
+import React from 'react';
+import renderer from 'react-test-renderer';
 import MealCard from '../components/MealCard';
-import '../css/components/MealResultsListing.css';
 
-configure({ adapter: new Adapter() });
+const details = {
+  className: 'slide-in-1',
+  handleMealRequest: jest.fn(),
+  meal: 'Breakfast',
+  details: {
+    id: 681594,
+    image: 'Huevos-Rancheros-681594.jpg',
+    imageUrls: ['Huevos-Rancheros-681594.jpg'],
+    readyInMinutes: 20,
+    title: 'Huevos Rancheros',
+  },
+};
 
-describe('Meal Result Listing', () => {
-  let component;
-  let props;
-  let mountedMealCard
-  const mealCard = () => {
-      if (!mountedMealCard) {
-        mountedMealCard = mount(
-          <MealCard />
-        );
-      }
-  return mountedMealCard;
- }
-
-  beforeEach(() => {
-    component = shallow(<MealCard />);
-
-  });
-
-  it('should render without crashing', () => {
-    expect(component.exists()).toEqual(true);
-  });
-
+it('renders correctly', () => {
+  const tree = renderer
+    .create(<MealCard
+      className={details.className}
+      meal={details.meal}
+      handleMealRequest={details.handleMealRequest}
+      details={details.details}
+    />).toJSON();
+  expect(tree).toMatchSnapshot();
 });
-*/

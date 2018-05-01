@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "node-sass-chokidar": "^1.2.2",
+    "npm": "^6.0.0",
     "prop-types": "^15.6.1",
     "react": "^16.3.1",
     "react-addons-css-transition-group": "^15.6.2",
@@ -34,7 +35,7 @@
     "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
-    "react-test-renderer": "^16.3.1",
+    "react-test-renderer": "^16.3.2",
     "selenium-standalone": "^6.13.0",
     "wdio-mocha-framework": "^0.5.13",
     "webdriverio": "^4.12.0"
