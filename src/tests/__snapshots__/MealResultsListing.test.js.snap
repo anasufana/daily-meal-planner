@@ -1,0 +1,249 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="results-container"
+>
+  <a
+    className="back-link"
+    href="/"
+    onClick={[Function]}
+  >
+    &lt; Go back
+  </a>
+  <div
+    className="meal-calories-label"
+  >
+    <h3
+      className="h3-calories"
+    >
+      Total day calories:
+      <span
+        className="calories-amount"
+      >
+        1695.24
+      </span>
+    </h3>
+  </div>
+  <div
+    className="meal-results-listing"
+  >
+    <div
+      className="single-column slide-in-1"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      <h2
+        className="meal-title"
+      >
+        breakfast
+      </h2>
+      <div
+        className="img-container"
+      >
+        <img
+          alt="Breakfast-recipe"
+          className="image-recipe"
+          src="https://spoonacular.com/recipeImages/Salmon-Artichoke-Quiche-516473.png"
+          title="Breakfast-recipe"
+        />
+        <div
+          className="hover-box"
+        >
+          <h3
+            className="hover-title"
+          >
+            Time to cook!
+          </h3>
+          <img
+            alt="Time"
+            className="img-cooking"
+            height="60"
+            src="/img/cooking.svg"
+            title="Time"
+            width="60"
+          />
+        </div>
+      </div>
+      <div
+        className="meal-details-container"
+      >
+        <div
+          className="meal-details"
+        >
+          <h3
+            className="recipe-title"
+          >
+            Salmon Artichoke Quiche
+             
+          </h3>
+        </div>
+        <div
+          className="meal-details clock-div"
+        >
+          <img
+            alt="Time"
+            className="img-clock"
+            height="20"
+            src="/img/clock.svg"
+            title="Time"
+            width="20"
+          />
+          <h3
+            className="recipe-duration"
+          >
+            95
+            '
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div
+      className="single-column slide-in-2"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      <h2
+        className="meal-title"
+      >
+        lunch
+      </h2>
+      <div
+        className="img-container"
+      >
+        <img
+          alt="Breakfast-recipe"
+          className="image-recipe"
+          src="https://spoonacular.com/recipeImages/Thai-pesto-prawn-noodles-220012.jpg"
+          title="Breakfast-recipe"
+        />
+        <div
+          className="hover-box"
+        >
+          <h3
+            className="hover-title"
+          >
+            Time to cook!
+          </h3>
+          <img
+            alt="Time"
+            className="img-cooking"
+            height="60"
+            src="/img/cooking.svg"
+            title="Time"
+            width="60"
+          />
+        </div>
+      </div>
+      <div
+        className="meal-details-container"
+      >
+        <div
+          className="meal-details"
+        >
+          <h3
+            className="recipe-title"
+          >
+            Thai pesto prawn noodles
+             
+          </h3>
+        </div>
+        <div
+          className="meal-details clock-div"
+        >
+          <img
+            alt="Time"
+            className="img-clock"
+            height="20"
+            src="/img/clock.svg"
+            title="Time"
+            width="20"
+          />
+          <h3
+            className="recipe-duration"
+          >
+            20
+            '
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div
+      className="single-column slide-in-3"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      <h2
+        className="meal-title"
+      >
+        dinner
+      </h2>
+      <div
+        className="img-container"
+      >
+        <img
+          alt="Breakfast-recipe"
+          className="image-recipe"
+          src="https://spoonacular.com/recipeImages/mahi-mahi-with-mango-vanilla-coulis-300236.jpeg"
+          title="Breakfast-recipe"
+        />
+        <div
+          className="hover-box"
+        >
+          <h3
+            className="hover-title"
+          >
+            Time to cook!
+          </h3>
+          <img
+            alt="Time"
+            className="img-cooking"
+            height="60"
+            src="/img/cooking.svg"
+            title="Time"
+            width="60"
+          />
+        </div>
+      </div>
+      <div
+        className="meal-details-container"
+      >
+        <div
+          className="meal-details"
+        >
+          <h3
+            className="recipe-title"
+          >
+            Mahi Mahi with Mango-Vanilla Coulis
+             
+          </h3>
+        </div>
+        <div
+          className="meal-details clock-div"
+        >
+          <img
+            alt="Time"
+            className="img-clock"
+            height="20"
+            src="/img/clock.svg"
+            title="Time"
+            width="20"
+          />
+          <h3
+            className="recipe-duration"
+          >
+            30
+            '
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

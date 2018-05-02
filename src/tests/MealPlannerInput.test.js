@@ -1,103 +1,42 @@
-/* global it, describe, expect, beforeEach */
+/* global it, expect, jest */
 
 import React from 'react';
-import { configure, shallow, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import renderer from 'react-test-renderer';
 import MealPlannerInput from '../components/MealPlannerInput';
-import PropTypes from 'prop-types';
 
-configure({ adapter: new Adapter() });
+const state = {
+  targetCaloriesValue:
+    {
+      value: 'banana',
+      warning: false,
+      warningText: 'Healthy target should be between 1000 and 3500',
+    },
+  excludeValue:
+    {
+      value: '2000',
+      warning: false,
+      warningText: 'Your exclude options are not valid. Try again.',
+    },
+  diets: [
+    { value: '', name: 'Good to go!', selected: false },
+    { value: 'gluten free', name: 'Gluten free', selected: false },
+    { value: 'ketogenic', name: 'Ketogenic', selected: false },
+    { value: 'vegetarian', name: 'Vegetarian', selected: true },
+    { value: 'vegan', name: 'Vegan', selected: false },
+    { value: 'pescetarian', name: 'Pescetarian', selected: false },
+    { value: 'paleo', name: 'Paleo', selected: false },
+  ],
+  disableButton: false,
+};
 
-describe('Meal Planner Input', () => {
-  let component;
-  let props;
-  let mountedMealPlannerInput
-  const mealPlanerInput = () => {
-      if (!mountedMealPlannerInput) {
-        mountedMealPlannerInput = mount(
-          <MealPlannerInput />
-        );
-      }
-  return mountedMealPlannerInput;
- }
-
-  beforeEach(() => {
-    component = shallow(<MealPlannerInput />);
-    
-  });
-
-  it('should render without crashing', () => {
-    expect(component.exists()).toEqual(true);
-  });
-
-  it("always renders a div", () => {
-  const divs = mealPlanerInput().find("div");
-  expect(divs.length).toBeGreaterThan(0);
+it('renders correctly', () => {
+  const tree = renderer
+    .create(<MealPlannerInput
+      {...state}
+      handleSubmit={jest.fn()}
+      handleDietSelect={jest.fn()}
+      handleExcludeValue={jest.fn()}
+      handleTargetCalorieChange={jest.fn()}
+    />).toJSON();
+  expect(tree).toMatchSnapshot();
 });
-
-  it("always renders a form", () => {
-  const forms = mealPlanerInput().find("form");
-  expect(forms.length).toBeGreaterThan(0);
-  });
-
-  describe('Diet input', () => {
-    it('Should have "Good to go!" as default selection', () => {
-      expect(mountedMealPlannerInput.find('.dropdown-select').childAt(0).prop('defaultValue')).toEqual(true);
-    });
-  });
-
-  describe('Exclude input', () => {
-    it('should accept no input', () => {
-        expect(mountedMealPlannerInput.state().excludeValue.warning).toEqual(false);
-      });
-//  });
-    it('should accept one item', () => {
-      if (mountedMealPlannerInput.state().excludeValue.value!==''){
-        expect(mountedMealPlannerInput.state().excludeValue.warning).toEqual(true);
-      }
-    });
-    it('should accept words separated by comma', () => {
-      const inputExlude=component.find('.form-exclude').text('nuts, bananas');
-      expect(mountedMealPlannerInput.state().excludeValue.value).toEqual(inputExlude);
-    });
-    it('should give out a warning if values are not letters, commas or spaces', () => {
-      const inputExclude= component.find('.form-exclude').text('$%^$');
-      expect(mountedMealPlannerInput.state().excludeValue.warning).toEqual(false);
-    });
-  });
-
-
-  describe('Calorie input', () => {
-     /*it('should accept values between 1000 and 3500', () => {
-       const inputCalories= component.find('.form-calories').text('1500');
-       expect(mountedMealPlannerInput.state().targetCaloriesValue.warning).toEqual(false);
-     }); */
-      //not working - inputCalories equals targetCaloriesValue but the warning does not change.
-
-     it('should give out a warning if values are  numbers and not between 1000 & 3500', () => {
-       const inputCalories= component.find('.form-calories').text('4000');
-       expect(mountedMealPlannerInput.state().targetCaloriesValue.warning).toEqual(true);
-     });
-
-     /*it('should give out a warning and disable submit button if characters are not numbers', () => {
-       const inputCalories= component.find('.form-calories').text('$%^$');
-       expect(mountedMealPlannerInput.state().excludeValue.warning).toEqual(false);
-     });*/
-   });
-
-   describe('Submit button', () => {
-     it('Should be disabled if calorie input has no value', () => {
-       const inputCalories= component.find('.form-calories').text('');
-       if (mountedMealPlannerInput.state().targetCaloriesValue.warning === false){
-         expect(mountedMealPlannerInput.find('.btn-submit').disabled).toEqual(false);
-      }
-     });
-
-     it('Should be enabled if calorie input has a numerical value', () => {
-       const inputCalories= component.find('.form-calories').text('1500');
-       if (mountedMealPlannerInput.state().targetCaloriesValue.warning === false){
-         expect(mountedMealPlannerInput.find('.btn-submit').disabled).toEqual(true);
-      }
-     });
-   });
- });
