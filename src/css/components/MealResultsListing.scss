@@ -10,20 +10,74 @@ a:visited,
 a:link {
   color: #555;
 }
+.calories-section {
+  width: 55%;
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 10px;
+}
 .meal-calories-label {
   text-align: left;
-  width: 55%;
-  margin: 0 auto;
-  padding-top: 20px;
-  border-top: 1px solid rgba(0,0,0,.3);
+  position: relative;
+  transform: perspective(1px) translateY(12%);
 }
+
+.donut-box {
+  padding: 20px;
+  border-left: 1px solid rgba(0,0,0,.2);
+  margin-bottom: 10px;
+}
+.legend-box {
+  text-align: left;
+}
+.ul-legend {
+  margin-top: 40px;
+  margin-left: -20px;
+  list-style: none outside none;
+}
+.ul-legend li {
+  font-size: 20px;
+  font-family: 'Nanum Gothic';
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+.li-carbs::before,
+.li-fats::before,
+.li-proteins::before {
+  display: inline-block;
+  content: '';
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  height: 10px;
+  width:  10px;
+  margin-right: 0.5rem;
+}
+.li-carbs::before {
+  background-color: #FF008E;
+}
+.li-fats::before {
+  background-color: #124E96;
+}
+.li-proteins::before {
+  background-color: #0D8ABC;
+}
+
 
 .h3-calories {
   display: inline-block;
   padding: 8px 10px;
-  background-color: white;
   border-radius: 5px 5px 0 0;
-  border-bottom: 3px solid black;
+  border-bottom: 3px solid #0D8ABC;
+  font-size: 28px;
+  margin-left: 20px;
+}
+.h3-calories-number {
+  font-size:50px;
+  margin-left: 20px;
+  margin-top: 10px;
 }
 
 .meal-results-listing {
@@ -52,15 +106,45 @@ a:link {
     grid-template-columns: 1fr;
     grid-column-gap: 20px;
   }
-  .meal-calories-label {
+  .meal-calories-label,
+  .calories-section {
     width: 75%;
+  }
+  .calories-section {
+    grid-template-columns: 1fr;
+    margin-top: 40px;
+  }
+  canvas {
+    margin-top: 40px;
+  }
+  .ul-legend {
+    margin-left: 20px;
+    padding-bottom: 10px;
+  }
+  .donut-box {
+    padding: 0;
+    border: none;
+  }
+  .h3-calories-number {
+    font-size: 35px;
+  }
+  .h3-calories {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
 @media only screen and (min-width: 769px) and (max-width: 1024px) {
   .meal-results-listing, 
-  .meal-calories-label {
+  .meal-calories-label,
+  .calories-section {
     width: 75%;
+  }
+  .ul-legend {
+    margin-left: -60px;
+  }
+  .donut-box {
+    border: none;
   }
 }
 

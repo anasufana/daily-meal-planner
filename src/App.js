@@ -7,7 +7,6 @@ import './css/App.css';
 import Header from './components/Header';
 import MealPlannerInputContainer from './components/MealPlannerInputContainer';
 import MealResultsListingContainer from './components/MealResultsListingContainer';
-
 import MealRecipe from './components/MealRecipe';
 import apiResponse2 from './mockAPIresponse/apiResponse';
 import mealStepsResponse from './mockAPIresponse/mealStepsResponse';
