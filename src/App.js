@@ -9,7 +9,7 @@ import MealPlannerInputContainer from './components/MealPlannerInputContainer';
 import MealResultsListingContainer from './components/MealResultsListingContainer';
 
 import MealRecipe from './components/MealRecipe';
-import apiResponse2 from './mockAPIresponse/apiResponse';
+import getMealPlan from './helpers/getMealPlan';
 import mealStepsResponse from './mockAPIresponse/mealStepsResponse';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -24,58 +24,7 @@ class App extends React.Component {
       testing: true,
     };
 
-    this.getMealPlan = this.getMealPlan.bind(this);
     this.getRecipeSteps = this.getRecipeSteps.bind(this);
-  }
-
-  getMealPlan(params) {
-    if (this.state.testing) {
-      this.setState({ apiResponse: { ...apiResponse2 } });
-      this.props.history.push('/results'); //eslint-disable-line
-    } else {
-      const defaultQueryObject = {
-        diet: '',
-        exclude: '',
-        targetCalories: '',
-        timeFrame: 'day',
-      };
-      const filteredDiet = params.diets.filter(diet => diet.selected === true);
-
-      const requestObject = {
-        ...defaultQueryObject,
-        diet: filteredDiet[0].value,
-        exclude: params.excludeValue.value.toLowerCase(),
-        targetCalories: params.targetCaloriesValue.value,
-      };
-
-      const euc = encodeURIComponent;
-      const query = Object.keys(requestObject)
-        .map(k => `${euc(k)}=${euc(requestObject[k])}`)
-        .join('&');
-
-      fetch(
-        `https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?${query}&stepBreakdown=false`,
-        {
-          method: 'GET',
-          headers: new Headers({
-            'X-Mashape-Key': API_KEY,
-            Accept: 'application/json',
-          }),
-        },
-      )
-        .then(body => body.json())
-        .then((body) => {
-          if (!body.status) {
-            this.setState({ apiResponse: { ...body } });
-            this.setState({ apiResponseError: false });
-          } else {
-            this.setState({ apiResponseError: true });
-            this.setState({ apiResponse: '' });
-          }
-          this.props.history.push('/results');
-        })
-        .catch(err => console.error(err)); //eslint-disable-line
-    }
   }
 
   getRecipeSteps(params) {
@@ -150,7 +99,9 @@ class App extends React.Component {
             exact
             path="/"
             render={() => (
-              <MealPlannerInputContainer handleSubmit={params => this.getMealPlan(params)} />
+              <MealPlannerInputContainer
+                handleSubmit={(params, history) => getMealPlan(params, this.props.history.push('/results'))}
+              />
             )}
           />
           <Route

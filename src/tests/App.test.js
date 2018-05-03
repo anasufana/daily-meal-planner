@@ -3,7 +3,7 @@
 import React from 'react';
 import { configure, shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { BrowserRouter as Router, withRouter } from 'react-router-dom';
+import { StaticRouter as Router, withRouter } from 'react-router-dom';
 import App from '../App';
 import Header from '../components/Header';
 import apiResponse2 from '../mockAPIresponse/apiResponse';
@@ -60,12 +60,12 @@ describe('App', () => {
 
   describe('Get Meal Plan', () => {
     beforeEach(() => {
-      mountedApp = mount(<Router><App /></Router>);
+      mountedApp = mount(<Router context={{ status: 200 }}><App /></Router>);
     });
 
     it('Should set the state to mock api if testing is true', () => {
       // mountedApp.setState({ testing: true });
-      console.log(mountedApp.instance());
+      console.log(mountedApp.find(App).instance());
       mountedApp.instance().getMealPlan({
         ...mealPlannerInputMock,
         handleSubmit: jest.fn(),
