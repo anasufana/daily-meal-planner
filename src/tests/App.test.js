@@ -60,12 +60,11 @@ describe('App', () => {
 
   describe('Get Meal Plan', () => {
     beforeEach(() => {
-      mountedApp = mount(<Router><App.WrappedComponent location="/" /></Router>);
+      mountedApp = mount(<Router><App /></Router>);
     });
 
     it('Should set the state to mock api if testing is true', () => {
       // mountedApp.setState({ testing: true });
-      // const component = shallow(<App />);
       console.log(mountedApp.instance());
       mountedApp.instance().getMealPlan({
         ...mealPlannerInputMock,
