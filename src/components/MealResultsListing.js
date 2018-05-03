@@ -1,29 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import MealCard from './MealCard';
-import '../css/components/MealResultsListing.css';
 import MealCaloriesDonut from './MealCaloriesDonut';
+import '../css/components/MealResultsListing.css';
 import '../css/components/MealCard.css';
 
-class MealResultsListing extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { ...props };
-  }
-
-  render() {
-    if (this.state.error) {
-      return (
-        <h2 className="meal-results-error">
-          Ooops! We can&apos;t seem to find a meal plan with theese requirements.<br />
-          <Link to="/">Try again?</Link>
-        </h2>
-      )
-    }
-    return (
-      <div className="results-container">
-        <Link to="/" className="back-link">&lt; Go back</Link>
-        <div className="calories-section">
+const MealResultsListing = props => (
+  <div className="results-container">
+    <Link to="/" className="back-link" href="/">&lt; Go back</Link>
+    <div className="calories-section">
           <div className="meal-calories-label">        
             <h3 className="h3-calories">Total day calories:</h3>
             <h3 className="h3-calories-number">{ this.state.apiResponse.nutrients.calories }</h3>
@@ -38,14 +24,32 @@ class MealResultsListing extends React.Component {
                <li className="li-proteins">{Math.round(this.state.apiResponse.nutrients.protein) + 'g of'} Proteins</li>
              </ul>
           </div>
-        </div>
-        <div className="meal-results-listing">
-          <MealCard className="slide-in-1" meal="breakfast" details={this.state.apiResponse.meals[0]} handleMealRequest={this.state.handleMealRequest} />
-          <MealCard className="slide-in-2" meal="lunch" details={this.state.apiResponse.meals[1]} handleMealRequest={this.state.handleMealRequest} />
-          <MealCard className="slide-in-3" meal="dinner" details={this.state.apiResponse.meals[2]} handleMealRequest={this.state.handleMealRequest} />
-        </div>
-      </div>
-    );
-  }
-}
+       </div>
+    <div className="meal-results-listing">
+      <MealCard className="slide-in-1" meal="breakfast" details={props.apiResponse.meals[0]} handleMealRequest={props.handleMealRequest} />
+      <MealCard className="slide-in-2" meal="lunch" details={props.apiResponse.meals[1]} handleMealRequest={props.handleMealRequest} />
+      <MealCard className="slide-in-3" meal="dinner" details={props.apiResponse.meals[2]} handleMealRequest={props.handleMealRequest} />
+    </div>
+  </div>
+);
+
+MealResultsListing.propTypes = {
+  apiResponse: PropTypes.shape({
+    meals: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      image: PropTypes.string.isRequired,
+      imagrUrls: PropTypes.string,
+      readyInMinutes: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+    }).isRequired).isRequired,
+    nutrients: PropTypes.shape({
+      calories: PropTypes.number.isRequired,
+      carbohydrates: PropTypes.number.isRequired,
+      fat: PropTypes.number.isRequired,
+      protein: PropTypes.number.isRequired,
+    }).isRequired,
+  }).isRequired,
+  handleMealRequest: PropTypes.func.isRequired,
+};
+
 export default MealResultsListing;
