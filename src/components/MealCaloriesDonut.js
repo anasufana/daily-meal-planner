@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react';
-import {Doughnut} from 'react-chartjs-2';
+import React, { Component } from 'react';
+import { Doughnut } from 'react-chartjs-2';
 import '../css/components/MealCaloriesDonut.css';
 
 class MealCaloriesDonut extends Component {
@@ -8,9 +8,9 @@ class MealCaloriesDonut extends Component {
     this.state = {
       donutData: {
         labels: [
-           'Carbs', 
-           'Fats', 
-           'Proteins'
+          'Carbs',
+          'Fats',
+          'Proteins',
         ],
         datasets: [{
           data: this.calculatePercentage(),
@@ -43,10 +43,11 @@ class MealCaloriesDonut extends Component {
   render() {
     return (
       <div className="donut-container">
-        <Doughnut ref='chart' 
-        data={this.state.donutData}
-        options = {
-            {maintainAspectRatio : false},
+        <Doughnut
+          ref='chart'
+          data={this.state.donutData}
+          options={
+              { maintainAspectRatio: false },
             {legend: {
               display: false,
               position: 'right',
@@ -69,4 +70,3 @@ class MealCaloriesDonut extends Component {
 // }
 
 export default MealCaloriesDonut;
-

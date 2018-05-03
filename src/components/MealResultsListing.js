@@ -10,21 +10,21 @@ const MealResultsListing = props => (
   <div className="results-container">
     <Link to="/" className="back-link" href="/">&lt; Go back</Link>
     <div className="calories-section">
-          <div className="meal-calories-label">        
-            <h3 className="h3-calories">Total day calories:</h3>
-            <h3 className="h3-calories-number">{ this.state.apiResponse.nutrients.calories }</h3>
-          </div>
-          <div className="donut-box">
-            <MealCaloriesDonut nutrients={ this.state.apiResponse.nutrients }/>
-          </div>
-          <div className="legend-box">
-             <ul className="ul-legend">
-               <li className="li-carbs">{Math.round(this.state.apiResponse.nutrients.carbohydrates) + 'g of'} Carbs</li>
-               <li className="li-fats">{Math.round(this.state.apiResponse.nutrients.fat) + 'g of'} Fats</li>
-               <li className="li-proteins">{Math.round(this.state.apiResponse.nutrients.protein) + 'g of'} Proteins</li>
-             </ul>
-          </div>
-       </div>
+      <div className="meal-calories-label">
+        <h3 className="h3-calories">Total day calories:</h3>
+        <h3 className="h3-calories-number">{props.apiResponse.nutrients.calories}</h3>
+      </div>
+      <div className="donut-box">
+        <MealCaloriesDonut nutrients={props.apiResponse.nutrients} />
+      </div>
+      <div className="legend-box">
+        <ul className="ul-legend">
+          <li className="li-carbs">{Math.round(props.apiResponse.nutrients.carbohydrates) + 'g of'} Carbs</li>
+          <li className="li-fats">{`${Math.round(props.apiResponse.nutrients.fat)}g of`} Fats</li>
+          <li className="li-proteins">{Math.round(props.apiResponse.nutrients.protein) + 'g of'} Proteins</li>
+        </ul>
+      </div>
+    </div>
     <div className="meal-results-listing">
       <MealCard className="slide-in-1" meal="breakfast" details={props.apiResponse.meals[0]} handleMealRequest={props.handleMealRequest} />
       <MealCard className="slide-in-2" meal="lunch" details={props.apiResponse.meals[1]} handleMealRequest={props.handleMealRequest} />
