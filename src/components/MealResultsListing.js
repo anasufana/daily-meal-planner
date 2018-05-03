@@ -25,9 +25,7 @@ class MealResultsListing extends React.Component {
         <Link to="/" className="back-link">&lt; Go back</Link>
         <div className="calories-section">
           <div className="meal-calories-label">        
-            <h3 className="h3-calories">Total day calories:
-              {/* <span className="calories-amount">{ this.state.apiResponse.nutrients.calories }</span> */}
-            </h3>
+            <h3 className="h3-calories">Total day calories:</h3>
             <h3 className="h3-calories-number">{ this.state.apiResponse.nutrients.calories }</h3>
           </div>
           <div className="donut-box">
