@@ -57,7 +57,7 @@ const MealPlannerInput = props => (
           {props.targetCaloriesValue.warningText}
         </span>
       </div>
-      <button className="submit-btn"type="submit" value="Submit" disabled={(props.targetCaloriesValue.warning || props.excludeValue.warning)}>Go!</button>
+      <button className="submit-btn"type="submit" value="Submit" disabled={props.disableButton}>Go!</button>
     </form>
   </div>
 );
@@ -82,6 +82,7 @@ MealPlannerInput.propTypes = {
     warningText: PropTypes.string.isRequired,
   }).isRequired,
   handleTargetCalorieChange: PropTypes.func.isRequired,
+  disableButton: PropTypes.bool.isRequired,
 };
 
 

@@ -29,13 +29,22 @@ class MealPlannerInputContainer extends React.Component {
         { value: 'pescetarian', name: 'Pescetarian', selected: false },
         { value: 'paleo', name: 'Paleo', selected: false },
       ],
+      disableButton: true,
     };
 
     this.handleTargetCalorieChange = this.handleTargetCalorieChange.bind(this);
     this.handleExcludeValue = this.handleExcludeValue.bind(this);
     this.handleDietSelect = this.handleDietSelect.bind(this);
     this.validateCalories = this.validateCalories.bind(this);
+    this.disableButton = this.disableButton.bind(this);
   }
+
+  disableButton() {
+    this.setState({
+      disableButton: (this.state.targetCaloriesValue.warning || this.state.excludeValue.warning),
+    });
+  }
+
   validateCalories(calories) {
     if (calories >= 1000 && calories <= 3500) {
       return false;
@@ -48,7 +57,7 @@ class MealPlannerInputContainer extends React.Component {
     const warning = this.validateCalories(targetCalories);
     this.setState({
       targetCaloriesValue: { ...this.state.targetCaloriesValue, value: e.target.value, warning },
-    });
+    }, () => this.disableButton());
   }
 
   handleExcludeValue(e) {
@@ -59,7 +68,10 @@ class MealPlannerInputContainer extends React.Component {
     if (excludeText && !/^[a-zA-Z ,]+$/.test(excludeText)) {
       warning = true;
     }
-    this.setState({ excludeValue: { ...this.state.excludeValue, value: e.target.value, warning } });
+    this.setState(
+      { excludeValue: { ...this.state.excludeValue, value: e.target.value, warning } },
+      () => this.disableButton(),
+    );
   }
 
   handleDietSelect(e) {

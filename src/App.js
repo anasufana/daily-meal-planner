@@ -1,5 +1,4 @@
 /* eslint no-return-assign: ["error", "always"] */
-/* global fetch, Headers */
 
 import { Route, withRouter } from 'react-router-dom';
 import React from 'react';
@@ -8,136 +7,44 @@ import Header from './components/Header';
 import MealPlannerInputContainer from './components/MealPlannerInputContainer';
 import MealResultsListingContainer from './components/MealResultsListingContainer';
 import MealRecipe from './components/MealRecipe';
-import apiResponse2 from './mockAPIresponse/apiResponse';
-import mealStepsResponse from './mockAPIresponse/mealStepsResponse';
-
-const API_KEY = process.env.REACT_APP_API_KEY;
+import getMealPlan from './helpers/getMealPlan';
+import getRecipeSteps from './helpers/getRecipeSteps';
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       apiResponse: '',
-      apiResponseError: false,
+      apiResponseError: true,
       mealRecipe: '',
-      testing: true,
     };
 
-    this.getMealPlan = this.getMealPlan.bind(this);
-    this.getRecipeSteps = this.getRecipeSteps.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.getSteps = this.getSteps.bind(this);
   }
 
-  getMealPlan(params) {
-    if (this.state.testing) {
-      this.setState({ apiResponse: { ...apiResponse2 } });
-      this.props.history.push('/results'); //eslint-disable-line
-    } else {
-      const defaultQueryObject = {
-        diet: '',
-        exclude: '',
-        targetCalories: '',
-        timeFrame: 'day',
-      };
-      const filteredDiet = params.diets.filter(diet => diet.selected === true);
-
-      const requestObject = {
-        ...defaultQueryObject,
-        diet: filteredDiet[0].value,
-        exclude: params.excludeValue.value.toLowerCase(),
-        targetCalories: params.targetCaloriesValue.value,
-      };
-
-      const euc = encodeURIComponent;
-      const query = Object.keys(requestObject)
-        .map(k => `${euc(k)}=${euc(requestObject[k])}`)
-        .join('&');
-
-      fetch(
-        `https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?${query}&stepBreakdown=false`,
-        {
-          method: 'GET',
-          headers: new Headers({
-            'X-Mashape-Key': API_KEY,
-            Accept: 'application/json',
-          }),
-        },
+  getSteps(params) {
+    getRecipeSteps(params).then(res => (
+      this.setState(
+        { mealRecipe: res },
+        () => this.props.history.push('/recipe'),
       )
-        .then(body => body.json())
-        .then((body) => {
-          if (!body.status) {
-            this.setState({ apiResponse: { ...body } });
-            this.setState({ apiResponseError: false });
+    ));
+  }
+
+  handleSubmit(params) {
+    getMealPlan(params).then(res => (
+      this.setState(
+        { apiResponse: res },
+        () => {
+          if (this.state.apiResponse) {
+            this.setState({ apiResponseError: false }, () => this.props.history.push('/results'));
           } else {
-            this.setState({ apiResponseError: true });
-            this.setState({ apiResponse: '' });
+            this.props.history.push('/results');
           }
-          this.props.history.push('/results');
-        })
-        .catch(err => console.error(err)); //eslint-disable-line
-    }
-  }
-
-  getRecipeSteps(params) {
-    if (this.state.testing) {
-      this.filterRecipeData(params, mealStepsResponse);
-    } else {
-      fetch(
-        `https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${params.id}/analyzedInstructions?stepBreakdown=true`,
-        {
-          method: 'GET',
-          headers: new Headers({
-            'X-Mashape-Key': API_KEY,
-            Accept: 'application/json',
-          }),
         },
       )
-        .then(body => body.json())
-        .then(body => this.filterRecipeData(params, body))
-        .catch(err => console.error(err)); //eslint-disable-line
-    }
-  }
-
-  filterRecipeData(params, stepsResponse) {
-    const mealRecipe = {
-      recipeTitle: params.title,
-      recipeImage: params.image,
-      readyInMinutes: params.readyInMinutes,
-      recipes:
-        [
-
-          stepsResponse.map((meal) => {
-            const recipeIngredients = [];
-            const recipeSteps = [];
-
-            meal.steps.map((step) => {
-              recipeSteps.push({ number: step.number, step: step.step });
-              return step.ingredients.map(ingredient => (
-                recipeIngredients.push(ingredient.name)
-              ));
-            });
-
-            return (
-              {
-                name: meal.name,
-                ingredients: recipeIngredients,
-                steps: recipeSteps,
-              }
-            );
-          }),
-        ],
-    };
-
-    let mealIngredients = [];
-    mealRecipe.recipes[0]
-      .map((meal) => {
-        mealIngredients = [...mealIngredients, ...meal.ingredients];
-        return true;
-      });
-    mealIngredients = mealIngredients.reduce((x, y) => (x.includes(y) ? x : [...x, y]), []);
-    mealRecipe.ingredients = [mealIngredients];
-
-    this.setState({ mealRecipe: { ...mealRecipe } });
-    this.props.history.push('/recipe');
+    ));
   }
 
   render() {
@@ -149,7 +56,9 @@ class App extends React.Component {
             exact
             path="/"
             render={() => (
-              <MealPlannerInputContainer handleSubmit={params => this.getMealPlan(params)} />
+              <MealPlannerInputContainer
+                handleSubmit={params => this.handleSubmit(params)}
+              />
             )}
           />
           <Route
@@ -158,7 +67,7 @@ class App extends React.Component {
               <MealResultsListingContainer
                 apiResponse={this.state.apiResponse}
                 error={this.state.apiResponseError}
-                handleMealRequest={params => this.getRecipeSteps(params)}
+                handleMealRequest={params => this.getSteps(params)}
               />
             )}
           />

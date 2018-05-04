@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="meal-planner-input"
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <div
+      className="input-container"
+    >
+      <span
+        className="form-span"
+      >
+        Choose your diet
+      </span>
+      <select
+        className="dropdown-select"
+        onChange={[Function]}
+      >
+        <option
+          defaultValue={false}
+          value=""
+        >
+          Good to go!
+        </option>
+        <option
+          defaultValue={false}
+          value="gluten free"
+        >
+          Gluten free
+        </option>
+        <option
+          defaultValue={false}
+          value="ketogenic"
+        >
+          Ketogenic
+        </option>
+        <option
+          defaultValue={true}
+          value="vegetarian"
+        >
+          Vegetarian
+        </option>
+        <option
+          defaultValue={false}
+          value="vegan"
+        >
+          Vegan
+        </option>
+        <option
+          defaultValue={false}
+          value="pescetarian"
+        >
+          Pescetarian
+        </option>
+        <option
+          defaultValue={false}
+          value="paleo"
+        >
+          Paleo
+        </option>
+      </select>
+    </div>
+    <div
+      className="input-container"
+    >
+      <span
+        className="form-span"
+      >
+        Exclude
+      </span>
+      <input
+        className="form-input-text form-exclude"
+        onChange={[Function]}
+        type="text"
+        value="2000"
+      />
+      <br />
+      <span
+        className="display-none"
+      >
+        Your exclude options are not valid. Try again.
+      </span>
+      <span
+        className="form-input-info"
+      >
+        Example: nuts, shallots - separated by comma.
+        <br />
+        Leave blank if you don't want to exclude anything
+      </span>
+    </div>
+    <div
+      className="input-container input-calories-container"
+    >
+      <span
+        className="form-span"
+      >
+        Target calories*
+      </span>
+      <input
+        className="form-input-text form-calories"
+        onChange={[Function]}
+        type="text"
+        value="banana"
+      />
+      <br />
+      <span
+        className="form-input-info"
+      >
+        Healthy target should be between 1000 and 3500
+      </span>
+    </div>
+    <button
+      className="submit-btn"
+      disabled={false}
+      type="submit"
+      value="Submit"
+    >
+      Go!
+    </button>
+  </form>
+</div>
+`;
