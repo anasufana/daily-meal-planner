@@ -3,9 +3,10 @@
 import React from 'react';
 import { configure, shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { StaticRouter as Router, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import App from '../App';
-import Header from '../components/Header';
+import MealPlannerInputContainer from '../components/MealPlannerInputContainer';
+import MealResultsListingContainer from '../components/MealResultsListingContainer';
 import apiResponse2 from '../mockAPIresponse/apiResponse';
 
 configure({ adapter: new Adapter() });
@@ -58,67 +59,10 @@ describe('App', () => {
     expect(component.exists()).toEqual(true);
   });
 
-  describe('Get Meal Plan', () => {
-    beforeEach(() => {
-      mountedApp = mount(<Router context={{ status: 200 }}><App /></Router>);
-    });
-
-    it('Should set the state to mock api if testing is true', () => {
-      // mountedApp.setState({ testing: true });
-      console.log(mountedApp.find(App).instance());
-      mountedApp.instance().getMealPlan({
-        ...mealPlannerInputMock,
-        handleSubmit: jest.fn(),
-        handleDietSelect: jest.fn(),
-        handleExcludeValue: jest.fn(),
-        handleTargetCalorieChange: jest.fn(),
-      });
-      expect(mountedApp.state().apiResponse).toBe(apiResponse2);
-    });
-
-    it('If testing is false, it calls fetch with the right data', () => {
-
-    });
-
-    it('If api response results in error, it sets the state of apiResponseError to true', () => {
-
-    });
-
-    it('If api response is fine, apiResponseError is false and apiResponse should contain the response data', () => {
-
-    });
-
-    it('Should render MealResultsLisingContainer regrdless of the results', () => {
-
-    });
-  })
-
-
-  // API unit testing
-
-  /*
-  describe("when `apiResponse` is defined", () => {
-    beforeEach(() => {
-      props.apiResponse = jest.fn();s
-    });
-
-    it("sets the rendered `MealResultsListing`'s `apiResponse`
-    prop to the same value as `this.state.apiResponse`'",
-    () => {
-      const mealResultsListing = app().find(MealResultsListing);
-      expect(mealResultsListing.props().apiResponse).toBe(props.apiResponse);
-    });
-  });
-  */
-
-  describe('when `apiResponse` is undefined', () => {
-    beforeEach(() => {
-      props.apiResponse = undefined;
-    });
-
-    it("sets the rendered `MealResultsListing`'s `apiResponse` prop to undefined'", () => {
-      const mealResultsListing = app().find(MealResultsListing);
-      expect(mealResultsListing.apiResponse).not.toBeDefined();
+  describe('Routes', () => {
+    it('renders MealPlannerInputContainer', () => {
+      mountedApp = mount(<Router initialEntries={['/']}><App /></Router>);
+      expect(mountedApp.find(MealPlannerInputContainer).length).toEqual(1);
     });
   });
 });
