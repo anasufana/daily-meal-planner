@@ -1,4 +1,4 @@
-/* global it, expect, jest */
+/* global it, expect */
 
 import React from 'react';
 import renderer from 'react-test-renderer';
@@ -7,7 +7,7 @@ import RecipeStep from '../components/RecipeStep';
 const details = {
   details: {
     number: 1,
-    step: 'Preheat the oven to 200 degrees F.'
+    step: 'Preheat the oven to 200 degrees F.',
   },
 };
 

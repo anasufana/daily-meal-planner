@@ -51,7 +51,7 @@ MealRecipe.propTypes = {
     recipeTitle: PropTypes.string.isRequired,
     recipeImage: PropTypes.string.isRequired,
     readyInMinutes: PropTypes.number.isRequired,
-    ingredients: PropTypes.arrayOf(PropTypes.string.isRequired),
+    ingredients: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string.isRequired)),
     recipes: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
       ingredients: PropTypes.arrayOf(PropTypes.string.isRequired),
       name: PropTypes.string.isRequired,

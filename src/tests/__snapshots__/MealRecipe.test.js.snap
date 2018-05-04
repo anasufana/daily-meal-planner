@@ -1,0 +1,179 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="recipe-page-container slide-in-1"
+>
+  <a
+    className="back-link"
+    href="/results"
+    onClick={[Function]}
+  >
+    &lt; Back to results
+  </a>
+  <h1
+    className="recipe-title-page"
+  >
+    My recipe
+  </h1>
+  <div
+    className="section-ingredients"
+  >
+    <div
+      className="recipe-img-box"
+    >
+      <img
+        alt="test-img"
+        className="image-recipe-page"
+        src="https://spoonacular.com/recipeImages/Salmon-Artichoke-Quiche-516473.png"
+      />
+      <div
+        className="clock-div-container"
+      >
+        <div
+          className="clock-div-button"
+        >
+          <img
+            alt="Time"
+            className="img-clock"
+            height="20"
+            src="/img/clock.svg"
+            title="Time"
+            width="20"
+          />
+          <h3
+            className="recipe-duration-page"
+          >
+            95
+             '
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div
+      className="ingredients-box"
+    >
+      <h2
+        className="ingredients-title"
+      >
+        Ingredients:
+      </h2>
+      <ul
+        className="ingredients-list"
+      >
+        <li
+          className="ingredients-list-item"
+        >
+          granulated sugar
+        </li>
+        <li
+          className="ingredients-list-item"
+        >
+          baking powder
+        </li>
+        <li
+          className="ingredients-list-item"
+        >
+          vanilla extract
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div>
+    <div>
+      <h1
+        className="h1-recipe-steps"
+      >
+        Recipe Steps
+      </h1>
+      <div
+        className="steps-container"
+      >
+        <h2
+          className="step-title"
+        >
+          Step 
+          <span
+            className="step-number"
+          >
+            1
+          </span>
+          :
+        </h2>
+        <p
+          className="step-description"
+        >
+          Preheat the oven to 200 degrees F.
+        </p>
+      </div>
+      <div
+        className="steps-container"
+      >
+        <h2
+          className="step-title"
+        >
+          Step 
+          <span
+            className="step-number"
+          >
+            2
+          </span>
+          :
+        </h2>
+        <p
+          className="step-description"
+        >
+          Whisk together the flour, pecans, granulated sugar, light brown sugar, baking powder, baking soda, and salt in a medium bowl.
+        </p>
+      </div>
+    </div>
+    <div>
+      <h1
+        className="h1-recipe-steps"
+      >
+        Bourbon Molasses Butter
+      </h1>
+      <div
+        className="steps-container"
+      >
+        <h2
+          className="step-title"
+        >
+          Step 
+          <span
+            className="step-number"
+          >
+            1
+          </span>
+          :
+        </h2>
+        <p
+          className="step-description"
+        >
+          Combine the bourbon and sugar in a small saucepan and cook over high heat until reduced to 3 tablespoons, remove and let cool.
+        </p>
+      </div>
+      <div
+        className="steps-container"
+      >
+        <h2
+          className="step-title"
+        >
+          Step 
+          <span
+            className="step-number"
+          >
+            2
+          </span>
+          :
+        </h2>
+        <p
+          className="step-description"
+        >
+          Put the butter, molasses, salt and cooled bourbon mixture in a food processor and process until smooth.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
