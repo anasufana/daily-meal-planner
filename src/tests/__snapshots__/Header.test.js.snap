@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="header"
+>
+  <img
+    alt="logo"
+    className="logo"
+    height="200"
+    src="/img/logo.svg"
+    title="logo"
+    width="200"
+  />
+  <h1
+    className="logo-title"
+  >
+    Daily Food Planner
+  </h1>
+</div>
+`;

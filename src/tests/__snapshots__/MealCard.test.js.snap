@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="single-column slide-in-1"
+  onClick={[Function]}
+  onKeyPress={[Function]}
+  role="button"
+  tabIndex={0}
+>
+  <h2
+    className="meal-title"
+  >
+    Breakfast
+  </h2>
+  <div
+    className="img-container"
+  >
+    <img
+      alt="Breakfast-recipe"
+      className="image-recipe"
+      src="https://spoonacular.com/recipeImages/Huevos-Rancheros-681594.jpg"
+      title="Breakfast-recipe"
+    />
+    <div
+      className="hover-box"
+    >
+      <h3
+        className="hover-title"
+      >
+        Time to cook!
+      </h3>
+      <img
+        alt="Time"
+        className="img-cooking"
+        height="60"
+        src="/img/cooking.svg"
+        title="Time"
+        width="60"
+      />
+    </div>
+  </div>
+  <div
+    className="meal-details-container"
+  >
+    <div
+      className="meal-details"
+    >
+      <h3
+        className="recipe-title"
+      >
+        Huevos Rancheros
+         
+      </h3>
+    </div>
+    <div
+      className="meal-details clock-div"
+    >
+      <img
+        alt="Time"
+        className="img-clock"
+        height="20"
+        src="/img/clock.svg"
+        title="Time"
+        width="20"
+      />
+      <h3
+        className="recipe-duration"
+      >
+        20
+        '
+      </h3>
+    </div>
+  </div>
+</div>
+`;

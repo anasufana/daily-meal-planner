@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<h2
+  className="meal-results-error"
+>
+  Ooops! We can't seem to find a meal plan with theese requirements.
+  <br />
+  <a
+    href="/"
+    onClick={[Function]}
+  >
+    Try again?
+  </a>
+</h2>
+`;
